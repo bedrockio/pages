@@ -4,10 +4,8 @@ const fs = require('fs/promises');
 const sharp = require('sharp');
 const { round } = require('lodash');
 
-const { createUploads } = require('./uploads');
-
 async function createImageSet(options) {
-  const { file, sizes, authUser } = options;
+  const { file, sizes } = options;
 
   const filename = file.originalFilename;
   const ext = path.extname(filename);
@@ -19,26 +17,21 @@ async function createImageSet(options) {
 
   const ratio = round(metadata.width / metadata.height, 3);
 
-  const images = [];
+  const files = [];
 
   for (let size of sizes) {
     const file = {
+      size,
       buffer: await image.resize(size).avif().toBuffer(),
       filename: `${base}@${size}w.avif`,
-      mimetype: 'image/avif',
+      mimeType: 'image/avif',
     };
-    const [upload] = await createUploads(file, {
-      user: authUser,
-    });
-    images.push({
-      size,
-      upload,
-    });
+    files.push(file);
   }
 
   return {
     ratio,
-    images,
+    files,
   };
 }
 

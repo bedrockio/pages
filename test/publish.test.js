@@ -1,3 +1,5 @@
+const { assertPatched, assertNotPatched } = require('@kubernetes/client-node');
+
 const { publishSite } = require('../src/publish');
 const { SiteVersion, SiteField } = require('../src/models');
 const { mockTime, unmockTime } = require('./time');
@@ -46,5 +48,21 @@ describe('publishSite', () => {
       name: 'v1',
     });
     expect(version.current).toBe(false);
+  });
+
+  it('should update deployment in GKE environment', async () => {
+    process.env.KUBERNETES_SERVICE_HOST = '0.0.0.0';
+    await publishSite({
+      version: 'v1',
+    });
+    assertPatched('landing-deployment');
+    delete process.env.KUBERNETES_SERVICE_HOST;
+  });
+
+  it('should not update deployment outside of GKE', async () => {
+    await publishSite({
+      version: 'v1',
+    });
+    assertNotPatched();
   });
 });
