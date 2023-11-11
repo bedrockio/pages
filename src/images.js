@@ -7,10 +7,12 @@ const { round } = require('lodash');
 async function createImageSet(options) {
   const { file, sizes } = options;
 
-  const filename = file.originalFilename;
+  const filename = resolveFilename(file);
+  const filepath = resolveFilepath(file);
+
   const ext = path.extname(filename);
   const base = path.basename(filename, ext);
-  const buffer = await fs.readFile(file.filepath);
+  const buffer = await fs.readFile(filepath);
   const image = sharp(buffer);
 
   const metadata = await image.metadata();
@@ -33,6 +35,16 @@ async function createImageSet(options) {
     ratio,
     files,
   };
+}
+
+// Supports formidable
+function resolveFilename(file) {
+  return typeof file === 'string' ? file : file?.originalFilename;
+}
+
+// Supports formidable
+function resolveFilepath(file) {
+  return typeof file === 'string' ? path.resolve(file) : file?.filepath;
 }
 
 module.exports = {
