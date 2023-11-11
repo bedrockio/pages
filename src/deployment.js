@@ -1,4 +1,3 @@
-const config = require('@bedrockio/config');
 const k8s = require('@kubernetes/client-node');
 
 // Initialize the Kubernetes API client
@@ -7,11 +6,11 @@ kc.loadFromDefault();
 
 const client = kc.makeApiClient(k8s.AppsV1Api);
 
-const LANDING_DEPLOYMENT = config.get('LANDING_DEPLOYMENT');
-
-async function publishDeployment() {
-  if (!config.has('KUBERNETES_SERVICE_HOST')) {
+async function publishDeployment(deployment) {
+  if (!process.env['KUBERNETES_SERVICE_HOST']) {
     return;
+  } else if (!deployment) {
+    throw new Error('Deployment name is required.');
   }
   // Note that this operation requires the default service account to
   // have the ability to patch deployments. This can be added by applying:
@@ -19,7 +18,7 @@ async function publishDeployment() {
   try {
     await client.patchNamespacedDeployment(
       // Deployment Name
-      LANDING_DEPLOYMENT,
+      deployment,
       // Namespace
       'default',
       // Spec update

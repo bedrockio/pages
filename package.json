@@ -11,9 +11,6 @@
   },
   "main": "dist/cjs/index.js",
   "dependencies": {
-    "@bedrockio/config": "^2.2.3",
-    "@bedrockio/logger": "^1.0.6",
-    "@google-cloud/storage": "^7.6.0",
     "@kubernetes/client-node": "^0.20.0",
     "lodash": "^4.17.21",
     "sharp": "^0.32.6"
@@ -26,6 +23,7 @@
   "devDependencies": {
     "@babel/cli": "^7.23.0",
     "@babel/core": "^7.23.3",
+    "@bedrockio/logger": "^1.0.6",
     "@babel/preset-env": "^7.23.3",
     "@bedrockio/model": "^0.2.1",
     "@bedrockio/prettier-config": "^1.0.2",

@@ -54,8 +54,9 @@ describe('publishSite', () => {
     process.env.KUBERNETES_SERVICE_HOST = '0.0.0.0';
     await publishSite({
       version: 'v1',
+      deployment: 'test-deployment',
     });
-    assertPatched('landing-deployment');
+    assertPatched('test-deployment');
     delete process.env.KUBERNETES_SERVICE_HOST;
   });
 
