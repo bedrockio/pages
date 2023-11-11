@@ -1,0 +1,17 @@
+{
+  "attributes": {
+    "name": {
+      "type": "String",
+      "required": true,
+      "unique": true
+    },
+    "current": {
+      "type": "Boolean",
+      "default": false
+    },
+    "publishedAt": {
+      "type": "Date",
+      "default": "now"
+    }
+  }
+}
