@@ -1,2 +1,4 @@
 .vscode
+dist
 types
+yarn-error.log

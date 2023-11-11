@@ -15,6 +15,15 @@ const client = kc.makeApiClient(k8s.AppsV1Api);
 
 const LANDING_DEPLOYMENT = config.get('LANDING_DEPLOYMENT');
 
+/**
+ * @param {object} options
+ * @param {string} options.version The version to set.
+ * @param {Array<Object>} options.pages Pages set for this version.
+ * @param {Array<Object>} options.fields Fields set for this version.
+ * @return {Promise}
+ *
+ * Publishes a version of the site.
+ */
 async function publishSite(options = {}) {
   const { version, pages, fields } = options;
   if (!version) {
@@ -71,7 +80,7 @@ async function publishDeployment() {
         headers: {
           'Content-Type': 'application/merge-patch+json',
         },
-      }
+      },
     );
   } catch (error) {
     throw new Error(error.body.message);
