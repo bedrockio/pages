@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "scripts/build",
     "lint": "eslint",
     "test": "jest",
     "types": "tsc",
+    "eject": "scripts/eject",
     "prepublishOnly": "yarn build && yarn types"
   },
-  "main": "dist/cjs/index.js",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./models": "./src/models/index.js"
+  },
   "dependencies": {
     "@kubernetes/client-node": "^0.20.0",
     "lodash": "^4.17.21",
@@ -21,17 +25,12 @@
     "mongoose": "^7.6.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.0",
-    "@babel/core": "^7.23.3",
     "@bedrockio/logger": "^1.0.6",
-    "@babel/preset-env": "^7.23.3",
     "@bedrockio/model": "^0.2.1",
     "@bedrockio/prettier-config": "^1.0.2",
     "@bedrockio/yada": "^1.0.35",
     "@shelf/jest-mongodb": "^4.1.7",
     "@sinonjs/fake-timers": "^11.2.2",
-    "babel-plugin-import-replacement": "^1.0.1",
-    "babel-plugin-module-resolver": "^5.0.0",
     "eslint": "^8.53.0",
     "eslint-plugin-bedrock": "^1.0.26",
     "jest": "^29.7.0",
