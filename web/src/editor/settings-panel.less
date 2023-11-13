@@ -1,0 +1,23 @@
+.settings-panel {
+  font-family: var(--editor-font-family);
+
+  &__trigger {
+    position: fixed;
+    z-index: 10000;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    cursor: pointer;
+    color: #fff;
+    mix-blend-mode: soft-light;
+    filter: drop-shadow(0px 0px 2px rgb(0 0 0 / 0.5));
+  }
+
+  &__triggers {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    margin-right: auto;
+  }
+}

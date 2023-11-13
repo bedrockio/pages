@@ -1,0 +1,50 @@
+.spinner {
+  overflow: hidden;
+
+  --color: #5997be;
+  --thickness: 5px;
+
+  &:not(.spinner--inline) {
+    position: absolute;
+    z-index: 1;
+    inset: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--inline {
+    display: inline-flex;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+  }
+
+  circle {
+    // Determined through experimentation.
+    --dasharray: calc(155px - var(--thickness) * 3);
+    animation: ring 2s ease-in-out infinite;
+    stroke: var(--color);
+    stroke-dasharray: var(--dasharray);
+    stroke-width: var(--thickness);
+    r: calc(25px - var(--thickness) / 2);
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ring {
+  0% {
+    stroke-dashoffset: var(--dasharray);
+  }
+  100% {
+    stroke-dashoffset: calc(var(--dasharray) * -1);
+  }
+}

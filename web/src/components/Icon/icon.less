@@ -1,0 +1,19 @@
+.icon {
+  --size: 24px;
+
+  width: var(--size);
+  height: var(--size);
+
+  cursor: pointer;
+  fill: currentColor;
+  vertical-align: middle;
+  box-sizing: content-box;
+
+  &--small {
+    --size: 14px;
+  }
+
+  use {
+    pointer-events: none;
+  }
+}

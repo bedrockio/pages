@@ -1,0 +1,123 @@
+#!/usr/bin/env node
+/* eslint no-console: 0 */
+
+const fs = require('fs/promises');
+const path = require('path');
+
+const subfont = require('subfont');
+const webpack = require('webpack');
+
+const fetchData = require('../fetch-data');
+
+(async () => {
+  const data = await withSpinner(fetchData(), 'Fetching data...');
+  const files = await withSpinner(compileSite(data), 'Building site...');
+  await withSpinner(optimizeFonts(files), 'Optimizing fonts...');
+
+  console.info('');
+  console.info('Finished! You can now serve these files with "yarn serve".');
+  console.info('');
+
+})();
+
+async function loadConfig(file) {
+  let { default: module } = await import(file);
+  if (typeof module === 'function') {
+    module = await module();
+  }
+  return module;
+}
+
+async function compileSite(data) {
+  const clientConfig = await loadConfig('../webpack.client.js');
+  const generatorConfig = await loadConfig('../webpack.generator.js');
+
+  const analyze = process.argv.some((arg) => {
+    return arg === '--analyze';
+  });
+
+  if (analyze) {
+    const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+    clientConfig.plugins.push(new BundleAnalyzerPlugin());
+  }
+
+  const compiler = webpack([clientConfig, generatorConfig]);
+
+  await fs.rm(path.resolve('dist'), {
+    force: true,
+    recursive: true,
+  });
+
+  await runCompiler(compiler);
+
+  const generator = require(path.resolve('dist/generator'));
+  const template = await fs.readFile('dist/generator/template.html', 'utf-8');
+
+  const files = await generator({
+    data,
+    template,
+  });
+
+  await fs.rm(path.resolve('dist/generator'), {
+    force: true,
+    recursive: true,
+  });
+
+  return files;
+}
+
+async function optimizeFonts(files) {
+  await subfont({
+    silent: true,
+    inPlace: true,
+    inlineCss: true,
+    inputFiles: files,
+    output: path.join(__dirname, '../dist'),
+  });
+}
+
+function runCompiler(compiler) {
+  return new Promise((resolve, reject) => {
+    compiler.run((err, stats) => {
+      if (err) {
+        reject(err);
+      }
+      if (Array.isArray(stats.stats)) {
+        stats = stats.stats;
+      } else {
+        stats = [stats];
+      }
+      const errors = stats.flatMap((stat) => {
+        return stat.compilation.errors;
+      });
+
+      if (errors.length) {
+        reject(errors[0]);
+      }
+
+      resolve(stats);
+    });
+  });
+}
+
+async function withSpinner(promise, message) {
+  const { oraPromise } = await import('ora');
+
+  return await oraPromise(promise, {
+    prefixText: message,
+    color: 'yellow',
+    spinner: {
+      interval: 80,
+      frames: [
+        '▰▱▱▱▱▱▱',
+        '▰▰▱▱▱▱▱',
+        '▰▰▰▱▱▱▱',
+        '▰▰▰▰▱▱▱',
+        '▰▰▰▰▰▱▱',
+        '▰▰▰▰▰▰▱',
+        '▰▰▰▰▰▰▰',
+        '▰▱▱▱▱▱▱',
+      ],
+    },
+  });
+}

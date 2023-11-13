@@ -1,5 +1,5 @@
 {
-  "name": "@bedrockio/pages",
+  "name": "@bedrockio/pages-api",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
@@ -7,16 +7,14 @@
     "test": "jest",
     "types": "tsc",
     "eject": "scripts/eject",
-    "prepublishOnly": "yarn build && yarn types"
+    "prepublishOnly": "yarn types"
   },
-  "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./models": "./src/models/index.js"
   },
   "dependencies": {
     "@kubernetes/client-node": "^0.20.0",
-    "lodash": "^4.17.21",
     "sharp": "^0.32.6"
   },
   "peerDependencies": {

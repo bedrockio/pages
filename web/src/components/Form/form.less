@@ -1,0 +1,23 @@
+.form {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+
+  &--disabled label {
+    opacity: 0.5;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: end;
+    gap: 0.5em;
+  }
+
+  &--loading::after {
+    content: '';
+    background-color: rgb(255 255 255 / 83%);
+    position: absolute;
+    inset: 0;
+  }
+}
