@@ -1,0 +1,73 @@
+#!/usr/bin/env node
+
+const fs = require('fs/promises');
+const path = require('path');
+
+const { createImageSet } = require('@bedrockio/pages');
+
+const SIZES = [300, 600, 1200];
+const IMAGE_TYPES = ['.png', '.jpg'];
+const OUTPUT_DIR = 'src/assets/images/sets';
+
+(async () => {
+  await buildImageSets();
+})();
+
+async function buildImageSets() {
+  let files = await fs.readdir('.');
+  files = files.filter((file) => {
+    return IMAGE_TYPES.includes(path.extname(file));
+  });
+  for (let file of files) {
+    const ext = path.extname(file);
+    const base = path.basename(file, ext);
+    const dir = path.join(OUTPUT_DIR, base);
+
+    const imports = [];
+    const images = [];
+
+    await fs.mkdir(dir, {
+      recursive: true,
+    });
+
+    const { ratio, files } = await createImageSet({
+      file,
+      sizes: SIZES,
+    });
+
+    for (let file of files) {
+      const { size, filename, buffer } = file;
+
+      await fs.writeFile(path.join(dir, filename), buffer);
+
+      const varName = `w${size}`;
+      imports.push(`import ${varName} from './${filename}';`);
+      images.push({
+        size,
+        url: varName,
+      });
+    }
+
+    const index = `
+${imports.join('\n')}
+
+export default {
+  ratio: ${ratio},
+  images: [
+    ${images
+      .map((v) => {
+        return `{
+    ${Object.entries(v)
+      .map(([key, value]) => {
+        return `  ${key}: ${value},`;
+      })
+      .join('\n    ')}
+    },`.trim();
+      })
+      .join('\n    ')}
+  ],
+}
+    `.trim();
+    await fs.writeFile(path.join(dir, 'index.js'), index);
+  }
+}

@@ -1,2 +1,12 @@
 #!/usr/bin/env node
+
+const { Command } = require('commander');
+const program = new Command();
+
+program
+  .name('serve-site')
+  .description('Serves the static files from the output directory.');
+
+program.parse();
+
 require('../serve/static');

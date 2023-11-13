@@ -7,7 +7,21 @@ const path = require('path');
 const subfont = require('subfont');
 const webpack = require('webpack');
 
+const { Command } = require('commander');
+
 const fetchData = require('../fetch-data');
+
+// Args
+
+const program = new Command();
+
+program
+  .name('build-site')
+  .description('Compiles React app into static site.')
+  .option('--analyze', 'Analyzes the build.');
+
+program.parse();
+const opts = program.opts();
 
 (async () => {
   const data = await withSpinner(fetchData(), 'Fetching data...');
@@ -17,7 +31,6 @@ const fetchData = require('../fetch-data');
   console.info('');
   console.info('Finished! You can now serve these files with "yarn serve".');
   console.info('');
-
 })();
 
 async function loadConfig(file) {
@@ -32,11 +45,7 @@ async function compileSite(data) {
   const clientConfig = await loadConfig('../webpack.client.js');
   const generatorConfig = await loadConfig('../webpack.generator.js');
 
-  const analyze = process.argv.some((arg) => {
-    return arg === '--analyze';
-  });
-
-  if (analyze) {
+  if (opts.analyze) {
     const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
     clientConfig.plugins.push(new BundleAnalyzerPlugin());
   }

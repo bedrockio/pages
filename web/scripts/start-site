@@ -1,2 +1,14 @@
 #!/usr/bin/env node
+
+// Args
+
+const { Command } = require('commander');
+const program = new Command();
+
+program
+  .name('start-site')
+  .description('Starts the dev server and runs the app.');
+
+program.parse();
+
 require('../serve/dev');

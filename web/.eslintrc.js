@@ -14,7 +14,7 @@ module.exports = {
       legacyDecorators: true,
     },
     babelOptions: {
-      configFile: path.join(__dirname, 'babel.config.js'),
+      configFile: path.join(__dirname, '.babelrc.json'),
     },
   },
   extends: [
