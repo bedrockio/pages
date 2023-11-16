@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+const fs = require('fs/promises');
+const path = require('path');
+const { execSync } = require('child_process');
+
+const rootPackage = require('../package.json');
+
+(async () => {
+  const { version } = rootPackage;
+  console.info(`Publishing: ${version}`);
+
+  await publishRepo('utils', '@bedrockio/pages-utils', version);
+  await publishRepo('api', '@bedrockio/pages-api', version);
+  await publishRepo('web', '@bedrockio/pages', version);
+})();
+
+async function publishRepo(name, pkgName, version) {
+  const file = path.resolve(`./${name}/package.json`);
+  const pkg = require(file);
+  const newPkg = { ...pkg, version };
+  if (newPkg.dependencies['@bedrockio/pages-utils']) {
+    newPkg.dependencies['@bedrockio/pages-utils'] = `^${version}`;
+  }
+
+  await fs.writeFile(file, JSON.stringify(newPkg, null, 2));
+
+  try {
+    execSync(`yarn workspace ${pkgName} publish`);
+  } catch {
+    // Do nothing
+  }
+}

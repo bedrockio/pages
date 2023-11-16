@@ -1,7 +1,7 @@
 {
   "license": "MIT",
-  "version": "0.1.0",
-  "name": "shared-utils",
+  "version": "0.1.2",
+  "name": "@bedrockio/pages-utils",
   "main": "./src/index.js",
   "scripts": {
     "lint": "eslint",

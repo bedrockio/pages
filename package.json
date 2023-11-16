@@ -1,7 +1,10 @@
 {
-  "name": "@bedrockio/pages-root",
   "private": true,
+  "version": "0.1.2",
   "license": "MIT",
+  "scripts": {
+    "publish": "scripts/publish"
+  },
   "workspaces": [
     "./api",
     "./web",
