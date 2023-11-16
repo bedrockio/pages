@@ -78,7 +78,7 @@ export default class EditFieldModal extends React.Component {
     }
     return (
       <Modal open className={this.getBlockClass()} onClose={this.onClose}>
-        <Modal.Header>Edit Field</Modal.Header>
+        <Modal.Header>{this.renderTitle()}</Modal.Header>
         <Modal.Content>
           <Form id="field" method="dialog" onSubmit={this.onSubmit}>
             <EditField field={field} onChange={this.onFieldChange} />
@@ -92,5 +92,11 @@ export default class EditFieldModal extends React.Component {
         </Modal.Actions>
       </Modal>
     );
+  }
+
+  renderTitle() {
+    const { field } = this.state;
+    const humanized = this.context.humanizeFieldName(field.name);
+    return `Edit ${humanized}`;
   }
 }

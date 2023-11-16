@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { kebabCase } from 'lodash';
+import { kebabCase, startCase } from 'lodash';
 
 import { replaceElement, removeElement } from 'utils/array';
 import { localStorage } from 'utils/storage';
@@ -212,6 +212,7 @@ export function DataProvider(props) {
         updateCollectionFields,
         getPageField,
         parseFieldName,
+        humanizeFieldName,
         getImageSizes,
         getFieldType,
         setFieldType,
@@ -279,6 +280,16 @@ function parseFieldName(fieldName) {
     name,
   };
   return x;
+}
+
+function humanizeFieldName(name) {
+  const match = name.match(FIELD_NAME_REG);
+  if (match) {
+    let [, collection, num, field] = match;
+    num = Number(match[2]) + 1;
+    name = startCase(`${collection} ${num} ${field}`);
+  }
+  return name;
 }
 
 function getPageField(page, name) {
