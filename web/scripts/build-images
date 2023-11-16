@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 const path = require('path');
 
 const { Command } = require('commander');
-const { createImageSet } = require('shared-utils');
+const { createImageSet } = require('@bedrockio/pages-utils');
 
 const SIZES = [300, 600, 1200];
 const EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.webp'];

@@ -1,4 +1,4 @@
-const { createImageSet } = require('shared-utils');
+const { createImageSet } = require('@bedrockio/pages-utils');
 
 const { getSiteData } = require('./data');
 const { publishSite } = require('./publish');
