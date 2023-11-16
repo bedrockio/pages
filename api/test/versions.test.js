@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const { getVersions, setCurrentVersion } = require('../src/versions');
 const { getSiteData } = require('../src/data');
 const { SiteVersion } = require('../src/models');
@@ -8,10 +10,12 @@ describe('getVersions', () => {
     mockTime('2020-02-01');
     await SiteVersion.create({
       name: 'v1',
+      user: new mongoose.Types.ObjectId(),
     });
     await SiteVersion.create({
       name: 'v2',
       current: true,
+      user: new mongoose.Types.ObjectId(),
     });
     const versions = await getVersions();
     expect(versions).toEqual([
@@ -36,10 +40,12 @@ describe('setVersion', () => {
     await SiteVersion.create({
       name: 'v1',
       current: true,
+      user: new mongoose.Types.ObjectId(),
     });
     await SiteVersion.create({
       name: 'v2',
       current: false,
+      user: new mongoose.Types.ObjectId(),
     });
     await setCurrentVersion('v2');
     const data = await getSiteData();
@@ -68,6 +74,7 @@ describe('setVersion', () => {
     await SiteVersion.create({
       name: 'v1',
       current: true,
+      user: new mongoose.Types.ObjectId(),
     });
     await expect(async () => {
       await setCurrentVersion('v1');

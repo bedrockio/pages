@@ -18,5 +18,10 @@
       "type": "Date",
       "default": "now"
     }
+  },
+  "search": {
+    "fields": [
+      "name"
+    ]
   }
 }

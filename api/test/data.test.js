@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const { getSiteData } = require('../src/data');
 const { SiteVersion, SiteField } = require('../src/models');
 const { mockTime, unmockTime } = require('./time');
@@ -13,6 +15,7 @@ describe('getSiteData', () => {
     await SiteVersion.create({
       name: 'v1',
       current: true,
+      user: new mongoose.Types.ObjectId(),
     });
     await SiteField.create({
       name: 'foo',
@@ -40,11 +43,13 @@ describe('getSiteData', () => {
     await SiteVersion.create({
       name: 'v1',
       publishedAt: '2020-01-01T00:00:00.000Z',
+      user: new mongoose.Types.ObjectId(),
     });
 
     await SiteVersion.create({
       name: 'v2',
       publishedAt: '2020-01-02T00:00:00.000Z',
+      user: new mongoose.Types.ObjectId(),
     });
 
     await SiteField.create({

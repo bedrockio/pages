@@ -15,14 +15,17 @@ export default class Actions extends React.Component {
 
   render() {
     const props = omit(this.props, Object.keys(Actions.propTypes));
-    return <div {...props} className={this.getBlockClass()} />;
+    const Element = this.props.as;
+    return <Element {...props} className={this.getBlockClass()} />;
   }
 }
 
 Actions.propTypes = {
+  as: PropTypes.elementType,
   left: PropTypes.bool,
 };
 
 Actions.defaultProps = {
+  as: 'div',
   left: false,
 };

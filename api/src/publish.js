@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { SiteVersion } = require('./models');
 const { updatePages } = require('./pages');
 const { updateFields } = require('./fields');
-const { publishVersion } = require('./versions');
+const { publishVersion, setCurrentVersion } = require('./versions');
 const { publishDeployment } = require('./deployment');
 
 /**
@@ -15,7 +15,7 @@ const { publishDeployment } = require('./deployment');
  *
  * Publishes a version of the site.
  */
-async function publishSite(options = {}) {
+async function publish(options = {}) {
   const { version, pages, fields, user, deployment } = options;
   if (!version) {
     throw new Error('Version required.');
@@ -25,8 +25,7 @@ async function publishSite(options = {}) {
     }
   }
 
-  const session = await mongoose.startSession();
-  await session.withTransaction(async () => {
+  await withTransaction(async () => {
     await updatePages(version, pages);
     await updateFields(version, fields);
     await publishVersion(version, user);
@@ -34,6 +33,23 @@ async function publishSite(options = {}) {
   });
 }
 
+async function revert(options = {}) {
+  const { version, deployment } = options;
+  if (!version) {
+    throw new Error('Version required.');
+  }
+  await withTransaction(async () => {
+    await setCurrentVersion(version);
+    await publishDeployment(deployment);
+  });
+}
+
+async function withTransaction(fn) {
+  const session = await mongoose.startSession();
+  await session.withTransaction(fn);
+}
+
 module.exports = {
-  publishSite,
+  publish,
+  revert,
 };

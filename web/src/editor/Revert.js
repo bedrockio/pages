@@ -112,7 +112,7 @@ export default class Revert extends React.Component {
           <b>Published:</b> {selected ? formatDate(selected.publishedAt) : '-'}
         </div>
         <Form.Actions>
-          <Button disabled={!selected} small>
+          <Button small disabled={!selected} onClick={this.onSubmit}>
             Submit
           </Button>
         </Form.Actions>

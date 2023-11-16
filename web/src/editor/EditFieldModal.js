@@ -45,6 +45,7 @@ export default class EditFieldModal extends React.Component {
     this.setState({
       field: {
         ...this.context.getField(name),
+        name,
         type,
       },
     });

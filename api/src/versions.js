@@ -8,6 +8,10 @@ async function getVersions() {
   });
 }
 
+async function searchVersions(query) {
+  return await SiteVersion.search(query);
+}
+
 async function getVersion(name) {
   let version;
   if (name) {
@@ -31,6 +35,12 @@ async function publishVersion(name, user) {
     user,
   });
   await setCurrentVersion(name);
+}
+
+async function getCurrentVersion() {
+  return await SiteVersion.findOne({
+    current: true,
+  });
 }
 
 async function setCurrentVersion(name) {
@@ -60,6 +70,8 @@ async function setCurrentVersion(name) {
 module.exports = {
   getVersion,
   getVersions,
+  searchVersions,
   publishVersion,
+  getCurrentVersion,
   setCurrentVersion,
 };

@@ -1,14 +1,16 @@
+const mongoose = require('mongoose');
 const { assertPatched, assertNotPatched } = require('@kubernetes/client-node');
 
-const { publishSite } = require('../src/publish');
+const { publish } = require('../src/publish');
 const { SiteVersion, SiteField } = require('../src/models');
 const { mockTime, unmockTime } = require('./time');
 
-describe('publishSite', () => {
+describe('publish', () => {
   it('should publish site version', async () => {
     mockTime('2020-02-01');
-    await publishSite({
+    await publish({
       version: 'v1',
+      user: new mongoose.Types.ObjectId(),
     });
     const version = await SiteVersion.findOne({
       name: 'v1',
@@ -19,7 +21,7 @@ describe('publishSite', () => {
   });
 
   it('should publish site fields', async () => {
-    await publishSite({
+    await publish({
       version: 'v1',
       fields: [
         {
@@ -28,6 +30,7 @@ describe('publishSite', () => {
           value: 'bar',
         },
       ],
+      user: new mongoose.Types.ObjectId(),
     });
     const field = await SiteField.findOne({
       name: 'foo',
@@ -40,9 +43,11 @@ describe('publishSite', () => {
     await SiteVersion.create({
       name: 'v1',
       current: true,
+      user: new mongoose.Types.ObjectId(),
     });
-    await publishSite({
+    await publish({
       version: 'v2',
+      user: new mongoose.Types.ObjectId(),
     });
     const version = await SiteVersion.findOne({
       name: 'v1',
@@ -52,17 +57,19 @@ describe('publishSite', () => {
 
   it('should update deployment in GKE environment', async () => {
     process.env.KUBERNETES_SERVICE_HOST = '0.0.0.0';
-    await publishSite({
+    await publish({
       version: 'v1',
       deployment: 'test-deployment',
+      user: new mongoose.Types.ObjectId(),
     });
     assertPatched('test-deployment');
     delete process.env.KUBERNETES_SERVICE_HOST;
   });
 
   it('should not update deployment outside of GKE', async () => {
-    await publishSite({
+    await publish({
       version: 'v1',
+      user: new mongoose.Types.ObjectId(),
     });
     assertNotPatched();
   });

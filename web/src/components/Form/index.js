@@ -4,7 +4,6 @@ import { omit } from 'lodash';
 
 import Message from 'components/Message';
 import Spinner from 'components/Spinner';
-import Actions from 'components/Actions';
 
 import bem from 'utils/bem';
 
@@ -14,9 +13,15 @@ import Input from './Input';
 import Select from './Select';
 import Button from './Button';
 import Toggle from './Toggle';
+import Actions from './Actions';
 import ImageSet from './ImageSet';
 
 import './form.less';
+
+const Context = React.createContext();
+
+Field.contextType = Context;
+Actions.contextType = Context;
 
 @bem
 export default class Form extends React.Component {
@@ -43,15 +48,17 @@ export default class Form extends React.Component {
     const props = omit(this.props, Object.keys(Form.propTypes));
     const { children, ...rest } = props;
     return (
-      <form
-        {...rest}
-        noValidate
-        onSubmit={this.onSubmit}
-        className={this.getBlockClass()}>
-        {this.renderError()}
-        {this.renderSpinner()}
-        {children}
-      </form>
+      <Context.Provider value={{ disabled: this.props.disabled }}>
+        <form
+          {...rest}
+          noValidate
+          onSubmit={this.onSubmit}
+          className={this.getBlockClass()}>
+          {this.renderError()}
+          {this.renderSpinner()}
+          {children}
+        </form>
+      </Context.Provider>
     );
   }
 
