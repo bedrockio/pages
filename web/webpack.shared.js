@@ -28,8 +28,11 @@ module.exports = {
       {
         test: /\.m?js$/,
         type: 'javascript/auto',
-        use: 'babel-loader',
+        loader: require.resolve('babel-loader'),
         exclude: /node_modules/,
+        options: {
+          configFile: require.resolve('./.babelrc.json'),
+        },
       },
       {
         test: /\.(png|jpg|gif|webp|avif|svg|mp4|pdf|eot|ttf|woff2?)$/,

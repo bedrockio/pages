@@ -14,8 +14,8 @@
     "./models": "./src/models/index.js"
   },
   "dependencies": {
-    "@kubernetes/client-node": "^0.20.0",
-    "sharp": "^0.32.6"
+    "shared-utils": "*",
+    "@kubernetes/client-node": "^0.20.0"
   },
   "peerDependencies": {
     "@bedrockio/model": "^0.2.1",

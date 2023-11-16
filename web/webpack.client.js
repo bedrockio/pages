@@ -17,9 +17,9 @@ module.exports = {
         test: /\.(css|less)$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'less-loader',
+          require.resolve('css-loader'),
+          require.resolve('postcss-loader'),
+          require.resolve('less-loader'),
         ],
       },
     ],

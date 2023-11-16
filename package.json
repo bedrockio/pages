@@ -1,0 +1,14 @@
+{
+  "name": "@bedrockio/pages-root",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "./api",
+    "./web",
+    "./utils"
+  ],
+  "volta": {
+    "node": "18.14.0",
+    "yarn": "1.22.19"
+  }
+}

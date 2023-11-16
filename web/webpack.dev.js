@@ -15,13 +15,20 @@ module.exports = {
     assetModuleFilename: 'assets/[contenthash][ext]',
     clean: true,
   },
-  entry: ['webpack-hot-middleware/client', './src/dev.entry.js'],
+  entry: [
+    require.resolve('webpack-hot-middleware/client'),
+    './src/dev.entry.js',
+  ],
   module: {
     rules: [
       ...config.module.rules,
       {
         test: /\.(css|less)$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
+        use: [
+          require.resolve('style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('less-loader'),
+        ],
       },
     ],
   },

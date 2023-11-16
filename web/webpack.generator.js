@@ -14,7 +14,11 @@ module.exports = {
       ...config.module.rules,
       {
         test: /\.(css|less)$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
+        use: [
+          require.resolve('style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('less-loader'),
+        ],
       },
     ],
   },

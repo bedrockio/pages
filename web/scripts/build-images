@@ -3,25 +3,62 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-const { createImageSet } = require('@bedrockio/pages');
+const { Command } = require('commander');
+const { createImageSet } = require('shared-utils');
 
 const SIZES = [300, 600, 1200];
-const IMAGE_TYPES = ['.png', '.jpg'];
+const EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.webp'];
+const INPUT_DIR = '.';
 const OUTPUT_DIR = 'src/assets/images/sets';
+
+// Args
+
+const program = new Command();
+
+program
+  .name('build-images')
+  .argument('[path]', 'The input directory.', INPUT_DIR)
+  .description(
+    [
+      'Compiles images into multiple sizes optimized for the web.',
+      'Outputs as modules to be imported by the web app.',
+    ].join('\n'),
+  )
+  .option(
+    '--sizes <numbers...>',
+    'The sizes to target',
+    (str) => {
+      return str.split(',').map(Number);
+    },
+    SIZES,
+  )
+  .option('-o, --output <string>', 'The output directory.', OUTPUT_DIR);
+
+program.parse();
+const opts = program.opts();
 
 (async () => {
   await buildImageSets();
 })();
 
 async function buildImageSets() {
-  let files = await fs.readdir('.');
-  files = files.filter((file) => {
-    return IMAGE_TYPES.includes(path.extname(file));
+  const input = program.args[0] || INPUT_DIR;
+  let files = await fs.readdir(input, {
+    withFileTypes: true,
   });
+
+  files = files.map((ent) => {
+    return path.join(ent.path, ent.name);
+  });
+
+  files = files.filter((file) => {
+    return EXTENSIONS.includes(path.extname(file));
+  });
+
   for (let file of files) {
     const ext = path.extname(file);
     const base = path.basename(file, ext);
-    const dir = path.join(OUTPUT_DIR, base);
+    const dir = path.join(opts.output, base);
 
     const imports = [];
     const images = [];
@@ -32,7 +69,7 @@ async function buildImageSets() {
 
     const { ratio, files } = await createImageSet({
       file,
-      sizes: SIZES,
+      sizes: opts.sizes,
     });
 
     for (let file of files) {
