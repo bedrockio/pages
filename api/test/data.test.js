@@ -7,7 +7,10 @@ const { mockTime, unmockTime } = require('./time');
 describe('getSiteData', () => {
   it('should fetch initial site data', async () => {
     const data = await getSiteData();
-    expect(data).toEqual({});
+    expect(data).toEqual({
+      pages: [],
+      fields: [],
+    });
   });
 
   it('should fetch current site data', async () => {

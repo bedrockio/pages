@@ -10,7 +10,10 @@ const { getPages } = require('./pages');
 async function getSiteData(versionName) {
   const version = await getVersion(versionName);
   if (!version) {
-    return {};
+    return {
+      pages: [],
+      fields: [],
+    };
   }
   const { name, publishedAt } = version;
   return {
