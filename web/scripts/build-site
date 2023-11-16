@@ -24,9 +24,9 @@ program.parse();
 const opts = program.opts();
 
 (async () => {
-  const data = await withSpinner(fetchData(), 'Fetching data...');
-  const files = await withSpinner(compileSite(data), 'Building site...');
-  await withSpinner(optimizeFonts(files), 'Optimizing fonts...');
+  const data = await runTask(fetchData(), 'Fetching data...');
+  const files = await runTask(compileSite(data), 'Building site...');
+  await runTask(optimizeFonts(files), 'Optimizing fonts...');
 
   console.info('');
   console.info('Finished! You can now serve these files with "yarn serve".');
@@ -109,6 +109,14 @@ function runCompiler(compiler) {
   });
 }
 
+async function runTask(promise, message) {
+  if (process.stdout.isTTY && false) {
+    return await withSpinner(promise, message);
+  } else {
+    return await withoutSpinner(promise, message);
+  }
+}
+
 async function withSpinner(promise, message) {
   const { oraPromise } = await import('ora');
 
@@ -129,4 +137,11 @@ async function withSpinner(promise, message) {
       ],
     },
   });
+}
+
+async function withoutSpinner(promise, message) {
+  process.stdout.write(message);
+  const ret = await promise;
+  process.stdout.write('done!\n');
+  return ret;
 }
