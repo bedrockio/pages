@@ -1,31 +1,49 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { mapValues } from 'lodash';
 
 import { useData } from 'stores/data';
 
 import Field from './Field';
 
-export default function Collection(props) {
-  const { name, render, ...rest } = props;
+function Collection(props, ref) {
+  const { name, render, fields, limit, ...rest } = props;
 
-  const { setCollection, getCollectionItems } = useData();
+  const { setCollection, getCollectionItems, getFieldValue } = useData();
 
-  setCollection(name, rest);
+  setCollection(name, {
+    fields,
+    limit,
+  });
+
   const items = getCollectionItems(name);
 
   function renderItems() {
     if (items.length) {
       return items.map((item, i) => {
-        item = mapValues(item, (field) => {
+        const fields = mapValues(item, (field) => {
           const { name, type } = field;
           return <Field name={name} type={type} />;
         });
-        return <React.Fragment key={i}>{render(item)}</React.Fragment>;
+
+        const data = mapValues(item, (field) => {
+          const { name } = field;
+          return getFieldValue(name);
+        });
+
+        data.number = i + 1;
+
+        return <React.Fragment key={i}>{render(fields, data)}</React.Fragment>;
       });
     } else {
       return 'No Items';
     }
   }
 
-  return <div data-collection-name={name}>{renderItems()}</div>;
+  return (
+    <div {...rest} ref={ref} data-collection-name={name}>
+      {renderItems()}
+    </div>
+  );
 }
+
+export default forwardRef(Collection);

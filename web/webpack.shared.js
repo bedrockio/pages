@@ -35,6 +35,13 @@ module.exports = {
         },
       },
       {
+        test: /@.+\.(png|jpg|gif|webp|avif|svg|mp4|pdf|eot|ttf|woff2?)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]',
+        },
+      },
+      {
         test: /\.(png|jpg|gif|webp|avif|svg|mp4|pdf|eot|ttf|woff2?)$/,
         type: 'asset/resource',
       },

@@ -17,7 +17,6 @@ export default class Image extends React.Component {
     let { set, sizes } = this.props;
     if (set) {
       const { ratio, images } = set;
-      const [first] = images;
       const srcSet = images
         .map((image) => {
           const { size } = image;
@@ -25,12 +24,11 @@ export default class Image extends React.Component {
           return `${url} ${size}w`;
         })
         .join(', ');
-      sizes ||= `${first.size}px`;
       return {
         srcSet,
         sizes,
         style: {
-          aspectRatio: ratio,
+          '--ratio': ratio,
         },
       };
     }

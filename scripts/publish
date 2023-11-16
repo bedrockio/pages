@@ -8,7 +8,8 @@ const rootPackage = require('../package.json');
 
 (async () => {
   const { version } = rootPackage;
-  console.info(`Publishing: ${version}`);
+  console.info(`Version: ${version}`);
+  console.info();
 
   await publishRepo('utils', '@bedrockio/pages-utils', version);
   await publishRepo('api', '@bedrockio/pages-api', version);
@@ -23,10 +24,13 @@ async function publishRepo(name, pkgName, version) {
     newPkg.dependencies['@bedrockio/pages-utils'] = `^${version}`;
   }
 
+  process.stdout.write(`Publishing: ${name}...`);
+
   await fs.writeFile(file, JSON.stringify(newPkg, null, 2));
 
   try {
     execSync(`yarn workspace ${pkgName} publish`);
+    process.stdout.write('done!\n');
   } catch {
     // Do nothing
   }

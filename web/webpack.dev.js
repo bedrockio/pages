@@ -9,12 +9,6 @@ module.exports = {
   ...config,
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
-  output: {
-    publicPath: '/',
-    filename: 'assets/[name].[contenthash].js',
-    assetModuleFilename: 'assets/[contenthash][ext]',
-    clean: true,
-  },
   entry: [
     require.resolve('webpack-hot-middleware/client'),
     './src/dev.entry.js',
