@@ -25,9 +25,10 @@ async function getVersion(name) {
   return version;
 }
 
-async function publishVersion(name) {
+async function publishVersion(name, user) {
   await SiteVersion.create({
     name,
+    user,
   });
   await setCurrentVersion(name);
 }
@@ -50,7 +51,7 @@ async function setCurrentVersion(name) {
       $set: {
         current: false,
       },
-    }
+    },
   );
   version.current = true;
   await version.save();

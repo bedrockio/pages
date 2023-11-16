@@ -9,6 +9,11 @@
       "type": "Boolean",
       "default": false
     },
+    "user": {
+      "type": "ObjectId",
+      "ref": "User",
+      "required": true
+    },
     "publishedAt": {
       "type": "Date",
       "default": "now"

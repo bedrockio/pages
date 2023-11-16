@@ -16,7 +16,7 @@ const { publishDeployment } = require('./deployment');
  * Publishes a version of the site.
  */
 async function publishSite(options = {}) {
-  const { version, pages, fields, deployment } = options;
+  const { version, pages, fields, user, deployment } = options;
   if (!version) {
     throw new Error('Version required.');
   } else {
@@ -29,7 +29,7 @@ async function publishSite(options = {}) {
   await session.withTransaction(async () => {
     await updatePages(version, pages);
     await updateFields(version, fields);
-    await publishVersion(version);
+    await publishVersion(version, user);
     await publishDeployment(deployment);
   });
 }
