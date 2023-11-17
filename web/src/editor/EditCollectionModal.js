@@ -132,20 +132,24 @@ export default class EditCollectionModal extends React.Component {
 
   renderItems() {
     const { collection, items } = this.state;
-    const { getCollectionFieldName } = this.context;
+    const { getCollectionFieldName, getFieldType, humanizeFieldName } =
+      this.context;
     return items.map((item, i) => {
       return (
         <div key={i} className={this.getElementClass('item')}>
-          {Object.entries(collection.fields).map(([name, type]) => {
-            const field = item[name] || {
-              name: getCollectionFieldName(collection.name, i, name),
+          {Object.entries(collection.fields).map(([name]) => {
+            const fullName = getCollectionFieldName(collection.name, i, name);
+            const type = getFieldType(fullName);
+            const field = {
+              ...item[name],
               type,
+              name: fullName,
             };
             return (
               <EditField
                 key={name}
                 field={field}
-                label={startCase(name)}
+                label={humanizeFieldName(name)}
                 className={this.getElementClass('item-field')}
                 onChange={(update) => {
                   this.updateItem(i, {

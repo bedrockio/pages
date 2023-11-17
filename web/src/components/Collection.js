@@ -8,7 +8,8 @@ import Field from './Field';
 function Collection(props, ref) {
   const { name, render, fields, limit, ...rest } = props;
 
-  const { setCollection, getCollectionItems, getFieldValue } = useData();
+  const { setCollection, getCollectionItems, getFieldValue, setFieldType } =
+    useData();
 
   setCollection(name, {
     fields,
@@ -23,6 +24,7 @@ function Collection(props, ref) {
         const renderProps = mapValues(item, (field, key) => {
           const { name } = field;
           const type = fields[key];
+          setFieldType(name, type);
           return <Field name={name} type={type} />;
         });
 

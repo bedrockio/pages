@@ -53,11 +53,11 @@ export function DataProvider(props) {
   // Field Types
 
   function setFieldType(name, type) {
-    FIELD_TYPES[name] ||= type;
+    FIELD_TYPES[normalizeFieldName(name)] ||= type;
   }
 
   function getFieldType(name) {
-    return FIELD_TYPES[name];
+    return FIELD_TYPES[normalizeFieldName(name)];
   }
 
   // Images
@@ -274,21 +274,35 @@ function parseFieldName(fieldName) {
   } else if (prefix) {
     type = 'page';
   }
-  const x = {
+  return {
     type,
     index,
     name,
   };
-  return x;
+}
+
+function normalizeFieldName(name) {
+  name = name.replace(FIELD_NAME_REG, (all, collection, num, field) => {
+    if (collection) {
+      return `$${collection}_${field}`;
+    } else {
+      return all;
+    }
+  });
+  return name;
 }
 
 function humanizeFieldName(name) {
   const match = name.match(FIELD_NAME_REG);
   if (match) {
     let [, collection, num, field] = match;
-    num = Number(match[2]) + 1;
-    name = startCase(`${collection} ${num} ${field}`);
+    if (collection && num && field) {
+      num = Number(match[2]) + 1;
+      name = `${collection} ${num} ${field}`;
+    }
   }
+  name = startCase(name);
+  name = name.replace(/Url/, 'URL');
   return name;
 }
 
