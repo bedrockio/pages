@@ -81,6 +81,7 @@ async function optimizeFonts(files) {
     inPlace: true,
     inlineCss: true,
     inputFiles: files,
+    format: ['woff2'],
     output: 'dist',
   });
 }
