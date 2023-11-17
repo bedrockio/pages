@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import { Link } from 'react-router-dom';
 import { omit } from 'lodash';
 
 import { DataContext } from 'stores/data';
 
+import ExternalLink from 'components/ExternalLink';
+
 import Image from 'components/Image';
 
-function convertLinks(node) {
-  const { href, children } = node;
+function convertLinks(props) {
+  const { href, children } = props;
   if (href.startsWith('http')) {
-    return <a href={href}>{children}</a>;
+    return <ExternalLink href={href}>{children}</ExternalLink>;
   } else {
     return <Link to={href}>{children}</Link>;
   }
@@ -65,27 +67,26 @@ export default class Field extends React.Component {
   renderText(value) {
     const { type } = this.props;
     let content = value;
-    if (content && type === 'string') {
-      content = (
-        <ReactMarkdown
-          components={{
-            p: React.Fragment,
-            a: convertLinks,
-          }}>
-          {content}
-        </ReactMarkdown>
-      );
-    } else if (content && type === 'text') {
-      content = (
-        <ReactMarkdown
-          components={{
-            a: convertLinks,
-          }}>
-          {content}
-        </ReactMarkdown>
-      );
+
+    const Element = type === 'text' ? 'div' : 'span';
+    const isMarkdown = type === 'string' || type === 'text';
+
+    if (content && isMarkdown) {
+      const options = {
+        overrides: {
+          a: convertLinks,
+        },
+      };
+      if (type === 'text') {
+        options.forceBlock = true;
+      } else {
+        options.forceInline = true;
+      }
+      content = <Markdown options={options}>{content}</Markdown>;
     }
-    return <span {...this.getProps()}>{content || this.getFallback()}</span>;
+    return (
+      <Element {...this.getProps()}>{content || this.getFallback()}</Element>
+    );
   }
 
   renderWithBreaks(str) {

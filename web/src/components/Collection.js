@@ -20,8 +20,9 @@ function Collection(props, ref) {
   function renderItems() {
     if (items.length) {
       return items.map((item, i) => {
-        const fields = mapValues(item, (field) => {
-          const { name, type } = field;
+        const renderProps = mapValues(item, (field, key) => {
+          const { name } = field;
+          const type = fields[key];
           return <Field name={name} type={type} />;
         });
 
@@ -32,7 +33,9 @@ function Collection(props, ref) {
 
         data.number = i + 1;
 
-        return <React.Fragment key={i}>{render(fields, data)}</React.Fragment>;
+        return (
+          <React.Fragment key={i}>{render(renderProps, data)}</React.Fragment>
+        );
       });
     } else {
       return 'No Items';
