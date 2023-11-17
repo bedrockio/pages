@@ -81,7 +81,7 @@ async function optimizeFonts(files) {
     inPlace: true,
     inlineCss: true,
     inputFiles: files,
-    output: path.join(__dirname, '../dist'),
+    output: 'dist',
   });
 }
 
