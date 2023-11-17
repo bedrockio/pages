@@ -79,6 +79,9 @@
     "eslint-import-resolver-babel-module": "^5.3.2",
     "eslint-plugin-bedrock": "^1.0.26",
     "prettier-eslint": "^16.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.19.0",
     "typescript": "^5.2.2"
   },
   "volta": {

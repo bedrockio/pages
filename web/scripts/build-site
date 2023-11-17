@@ -110,7 +110,7 @@ function runCompiler(compiler) {
 }
 
 async function runTask(promise, message) {
-  if (process.stdout.isTTY && false) {
+  if (process.stdout.isTTY) {
     return await withSpinner(promise, message);
   } else {
     return await withoutSpinner(promise, message);
