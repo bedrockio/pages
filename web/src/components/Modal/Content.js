@@ -1,4 +1,4 @@
-import { forwardRef } from 'React';
+import { forwardRef } from 'react';
 
 import { useClass } from 'utils/bem';
 
