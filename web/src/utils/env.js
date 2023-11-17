@@ -16,6 +16,7 @@ export const {
   API_URL,
   APP_NAME,
   APP_URL,
+  WEB_URL,
   APP_SUPPORT_EMAIL,
   SENTRY_DSN,
   ENV_NAME,

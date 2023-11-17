@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-import ReactDOMServer from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { DataProvider } from 'stores/data';
 
@@ -14,15 +15,22 @@ export default async function generator(options) {
   const files = [];
 
   for (let url of urls) {
-    const content = ReactDOMServer.renderToString(
-      <StaticRouter location={url}>
-        <DataProvider data={data}>
-          <App />
-        </DataProvider>
-      </StaticRouter>,
+    const helmetContext = {};
+    const content = renderToString(
+      <HelmetProvider context={helmetContext} prioritizeSeoTags>
+        <StaticRouter location={url}>
+          <DataProvider data={data}>
+            <App />
+          </DataProvider>
+        </StaticRouter>
+      </HelmetProvider>,
     );
 
+    const head = getHeadForContext(helmetContext);
+
     let html = template;
+
+    html = html.replace('<!-- HEAD -->', head);
     html = html.replace('<!-- BODY -->', content);
     html = html.replace(
       '<!-- env:data -->',
@@ -52,6 +60,15 @@ function getFileForUrl(url) {
   } else {
     return `${url}.html`;
   }
+}
+
+function getHeadForContext(context) {
+  const { helmet } = context;
+  let head = '';
+  for (let value of Object.values(helmet)) {
+    head += value.toString();
+  }
+  return head;
 }
 
 function getPaths(arg, prefix = '') {

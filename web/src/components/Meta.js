@@ -1,11 +1,24 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
+import { WEB_URL } from 'utils/env';
+
 export default function Meta(props) {
-  const location = useLocation();
+  const { pathname } = useLocation();
+
+  function renderCanonical() {
+    // Static generation will result in a location of /*
+    // for catch all routes which should be assumed to be
+    // 404 pages and should not return a canonical tag.
+    if (pathname !== '/*') {
+      const href = `${WEB_URL}${pathname}`;
+      return <link rel="canonical" href={href} />;
+    }
+  }
+
   return (
     <Helmet>
-      <link rel="canonical" href={location.href} />
+      {renderCanonical()}
       {props.children}
     </Helmet>
   );
