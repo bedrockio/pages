@@ -2,7 +2,6 @@ export * from 'stores/data';
 
 export { default as Icon } from 'components/Icon';
 export { default as Meta } from 'components/Meta';
-export { default as Form } from 'components/Form';
 export { default as Field } from 'components/Field';
 export { default as Image } from 'components/Image';
 export { default as Modal } from 'components/Modal';

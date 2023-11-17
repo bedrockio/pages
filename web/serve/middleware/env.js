@@ -1,12 +1,14 @@
 // Injects environment variables into templates.
 // Note that only public variables should be exposed!
 const config = require('@bedrockio/config');
-const { omitBy } = require('lodash');
 
-const PUBLIC = omitBy(
-  config.getAll(),
-  (_, key) => key.startsWith('SERVER') || key.startsWith('HTTP')
-);
+const PUBLIC = {};
+
+for (let [key, value] of Object.entries(config.getAll())) {
+  if (!key.startsWith('SERVER')) {
+    PUBLIC[key] = value;
+  }
+}
 
 const ENV_REG = /(?:<!-- |{{)env:(\w+)(?: -->|}})/g;
 

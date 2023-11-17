@@ -22,6 +22,9 @@ module.exports = {
     // Webpack's chooses "browser" first by default which can increase
     // bundle sizes as this is often pre-bundled code.
     mainFields: ['module', 'browser', 'main'],
+    alias: {
+      lodash: 'lodash-es',
+    },
   },
   module: {
     rules: [
