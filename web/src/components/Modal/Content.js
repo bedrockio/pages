@@ -1,6 +1,8 @@
+import { forwardRef } from 'React';
+
 import { useClass } from 'utils/bem';
 
-export default function Content(props) {
+export default forwardRef((props, ref) => {
   const { getElementClass } = useClass('modal', props);
-  return <div {...props} className={getElementClass('content')} />;
-}
+  return <div {...props} ref={ref} className={getElementClass('content')} />;
+});

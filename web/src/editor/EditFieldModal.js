@@ -32,7 +32,7 @@ export default class EditFieldModal extends React.Component {
   }
 
   onDocumentClick = (evt) => {
-    if (evt.target.closest('a')) {
+    if (evt.target.closest('a,[tabindex]')) {
       return;
     }
     const el = evt.target.closest('[data-field-name]');

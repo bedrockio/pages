@@ -1,5 +1,4 @@
 import React from 'react';
-import { startCase } from 'lodash';
 
 import { DataContext } from 'stores/data';
 
@@ -25,6 +24,7 @@ export default class EditCollectionModal extends React.Component {
       items: [],
       collection: null,
     };
+    this.ref = React.createRef();
   }
 
   componentDidMount() {
@@ -36,6 +36,9 @@ export default class EditCollectionModal extends React.Component {
   }
 
   onDocumentClick = (evt) => {
+    if (evt.target.closest('a,[tabindex]')) {
+      return;
+    }
     const el = evt.target.closest('[data-collection-name]');
     if (!el) {
       return;
@@ -89,7 +92,7 @@ export default class EditCollectionModal extends React.Component {
     return (
       <Modal open className={this.getBlockClass()} onClose={this.onClose}>
         <Modal.Header>Edit Collection</Modal.Header>
-        <Modal.Content>
+        <Modal.Content ref={this.ref}>
           <Form id="edit-collection" method="dialog" onSubmit={this.onSubmit}>
             {this.renderItems()}
           </Form>
@@ -116,6 +119,17 @@ export default class EditCollectionModal extends React.Component {
     this.setState({
       items: [...this.state.items, {}],
     });
+    setTimeout(this.scrollToBottom, 16);
+  };
+
+  scrollToBottom = () => {
+    const el = this.ref.current;
+    if (el) {
+      el.scrollTo({
+        top: el.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   };
 
   updateItem(index, update) {
@@ -132,14 +146,13 @@ export default class EditCollectionModal extends React.Component {
 
   renderItems() {
     const { collection, items } = this.state;
-    const { getCollectionFieldName, getFieldType, humanizeFieldName } =
-      this.context;
+    const { getCollectionFieldName, humanizeFieldName } = this.context;
     return items.map((item, i) => {
       return (
         <div key={i} className={this.getElementClass('item')}>
           {Object.entries(collection.fields).map(([name]) => {
             const fullName = getCollectionFieldName(collection.name, i, name);
-            const type = getFieldType(fullName);
+            const type = collection.fields[name];
             const field = {
               ...item[name],
               type,

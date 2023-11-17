@@ -43,32 +43,40 @@ const opts = program.opts();
 
 async function buildImageSets() {
   const input = program.args[0] || INPUT_DIR;
-  let files = await fs.readdir(input, {
-    withFileTypes: true,
-  });
+  let filepaths;
+  if (await isDirectory(input)) {
+    filepaths = await fs.readdir(input, {
+      withFileTypes: true,
+    });
+    filepaths = filepaths.map((ent) => {
+      return path.join(ent.path, ent.name);
+    });
+    filepaths = filepaths.filter((file) => {
+      return EXTENSIONS.includes(path.extname(file));
+    });
+  } else {
+    filepaths = [input];
+  }
 
-  files = files.map((ent) => {
-    return path.join(ent.path, ent.name);
-  });
-
-  files = files.filter((file) => {
-    return EXTENSIONS.includes(path.extname(file));
-  });
-
-  for (let file of files) {
-    const ext = path.extname(file);
-    const base = path.basename(file, ext);
+  for (let filepath of filepaths) {
+    const ext = path.extname(filepath);
+    const base = path.basename(filepath, ext);
     const dir = path.join(opts.output, base);
 
     const imports = [];
     const images = [];
+
+    await fs.rm(dir, {
+      force: true,
+      recursive: true,
+    });
 
     await fs.mkdir(dir, {
       recursive: true,
     });
 
     const { ratio, files } = await createImageSet({
-      file,
+      file: filepath,
       sizes: opts.sizes,
     });
 
@@ -107,4 +115,9 @@ export default {
     `.trim();
     await fs.writeFile(path.join(dir, 'index.js'), index);
   }
+}
+
+async function isDirectory(path) {
+  const stat = await fs.lstat(path);
+  return stat.isDirectory();
 }

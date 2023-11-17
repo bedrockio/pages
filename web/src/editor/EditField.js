@@ -42,7 +42,6 @@ export default class EditField extends React.Component {
           className={className}
           onChange={this.onValueChange}
         />
-        {field.type === 'markdown' && <div>Markdown Allowed</div>}
       </React.Fragment>
     );
   }
@@ -57,7 +56,6 @@ export default class EditField extends React.Component {
           className={className}
           onChange={this.onValueChange}
         />
-        {<div>Markdown Allowed</div>}
       </React.Fragment>
     );
   }

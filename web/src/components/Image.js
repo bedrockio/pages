@@ -36,7 +36,7 @@ export default class Image extends React.Component {
 
   render() {
     const props = omit(this.props, Object.keys(Image.propTypes));
-    return <img {...this.getSet()} {...props} />;
+    return <img loading="lazy" {...this.getSet()} {...props} />;
   }
 }
 
