@@ -28,12 +28,16 @@ function Collection(props, ref) {
           return <Field name={name} type={type} />;
         });
 
-        const data = mapValues(item, (field) => {
+        let data = mapValues(item, (field) => {
           const { name } = field;
           return getFieldValue(name);
         });
 
-        data.number = i + 1;
+        data = {
+          ...data,
+          index: i,
+          number: i + 1,
+        };
 
         return (
           <React.Fragment key={i}>{render(renderProps, data)}</React.Fragment>
