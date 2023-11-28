@@ -7,7 +7,6 @@ export { default as Image } from 'components/Image';
 export { default as Modal } from 'components/Modal';
 export { default as Button } from 'components/Button';
 export { default as Spacer } from 'components/Spacer';
-export { default as AppLink } from 'components/AppLink';
 export { default as Collection } from 'components/Collection';
 export { default as ServerError } from 'components/ServerError';
 export { default as LoginButton } from 'components/LoginButton';

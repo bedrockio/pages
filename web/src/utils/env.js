@@ -10,17 +10,8 @@ function loadNode() {
   }
 }
 
-const ENV = loadBrowser() || loadNode() || {};
+export function loadEnv() {
+  return loadBrowser() || loadNode() || {};
+}
 
-export const {
-  API_URL,
-  APP_NAME,
-  APP_URL,
-  WEB_URL,
-  APP_SUPPORT_EMAIL,
-  SENTRY_DSN,
-  ENV_NAME,
-  GOOGLE_API_KEY,
-  SENDBIRD_APPLICATION_ID,
-  API_KEY,
-} = ENV;
+export const { API_URL, API_KEY, ENV_NAME, LANDING_URL } = loadEnv();

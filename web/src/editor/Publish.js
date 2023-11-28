@@ -36,7 +36,7 @@ export default function Publish() {
     if (ENV_NAME === 'development') {
       return 'Site published.';
     } else {
-      return 'Site published. Deploymnent may take up to 5 minutes.';
+      return 'Site published. Deployment may take up to 5 minutes.';
     }
   }
 

@@ -1,10 +1,6 @@
-import { snakeCase } from 'lodash';
-
-import { APP_NAME } from 'utils/env';
-
 import { localStorage, sessionStorage } from 'utils/storage';
 
-export const JWT_KEY = `${snakeCase(APP_NAME)}_jwt`;
+export const JWT_KEY = 'jwt';
 
 export function hasToken() {
   return !!getToken();

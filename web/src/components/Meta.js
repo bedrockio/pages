@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
-import { WEB_URL } from 'utils/env';
+import { LANDING_URL } from 'utils/env';
 
 export default function Meta(props) {
   const { pathname } = useLocation();
@@ -11,7 +11,7 @@ export default function Meta(props) {
     // for catch all routes which should be assumed to be
     // 404 pages and should not return a canonical tag.
     if (pathname !== '/*') {
-      const href = `${WEB_URL}${pathname}`;
+      const href = `${LANDING_URL}${pathname}`;
       return <link rel="canonical" href={href} />;
     }
   }

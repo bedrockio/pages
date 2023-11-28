@@ -4,7 +4,12 @@ async function fetchData(url) {
   url ||= new URL('/1/site', config.get('API_URL'));
   try {
     const ret = await fetch(url);
-    const json = await ret.json();
+    let json;
+    try {
+      json = await ret.json();
+    } catch (error) {
+      throw new Error('Invalid JSON response from API. Is your URL correct?');
+    }
     if (json.error) {
       throw new Error(json.error.message);
     }
