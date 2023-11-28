@@ -67,8 +67,10 @@ export default class EditField extends React.Component {
       <Form.ImageSet
         sizes={sizes}
         label={label}
-        value={field.images}
+        value={field.value?.images || []}
         onChange={this.onImageChange}
+        onLoadingStart={this.props.onLoadingStart}
+        onLoadingStop={this.props.onLoadingStop}
         className={className}
       />
     );

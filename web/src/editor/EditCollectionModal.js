@@ -23,6 +23,7 @@ export default class EditCollectionModal extends React.Component {
     this.state = {
       items: [],
       collection: null,
+      loading: false,
     };
     this.ref = React.createRef();
   }
@@ -85,7 +86,7 @@ export default class EditCollectionModal extends React.Component {
   };
 
   render() {
-    const { items, collection } = this.state;
+    const { items, collection, loading } = this.state;
     if (!collection) {
       return null;
     }
@@ -93,7 +94,11 @@ export default class EditCollectionModal extends React.Component {
       <Modal open className={this.getBlockClass()} onClose={this.onClose}>
         <Modal.Header>Edit Collection</Modal.Header>
         <Modal.Content ref={this.ref}>
-          <Form id="edit-collection" method="dialog" onSubmit={this.onSubmit}>
+          <Form
+            id="edit-collection"
+            method="dialog"
+            loading={loading}
+            onSubmit={this.onSubmit}>
             {this.renderItems()}
           </Form>
         </Modal.Content>
@@ -120,6 +125,18 @@ export default class EditCollectionModal extends React.Component {
       items: [...this.state.items, {}],
     });
     setTimeout(this.scrollToBottom, 16);
+  };
+
+  onLoadingStart = () => {
+    this.setState({
+      loading: true,
+    });
+  };
+
+  onLoadingStop = () => {
+    this.setState({
+      loading: false,
+    });
   };
 
   scrollToBottom = () => {
@@ -164,6 +181,8 @@ export default class EditCollectionModal extends React.Component {
                 field={field}
                 label={humanizeFieldName(name)}
                 className={this.getElementClass('item-field')}
+                onLoadingStart={this.onLoadingStart}
+                onLoadingStop={this.onLoadingStop}
                 onChange={(update) => {
                   this.updateItem(i, {
                     ...item,

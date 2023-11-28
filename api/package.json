@@ -1,6 +1,6 @@
 {
   "name": "@bedrockio/pages-api",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "license": "MIT",
   "scripts": {
     "lint": "eslint",
@@ -14,7 +14,7 @@
     "./models": "./src/models/index.js"
   },
   "dependencies": {
-    "@bedrockio/pages-utils": "^0.1.22",
+    "@bedrockio/pages-utils": "^0.1.23",
     "@kubernetes/client-node": "^0.20.0"
   },
   "peerDependencies": {

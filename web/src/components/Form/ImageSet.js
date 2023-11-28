@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { omit } from 'lodash';
+import { omit, noop } from 'lodash';
 
 import { request } from 'utils/api';
 import { urlForUpload } from 'utils/uploads';
@@ -11,6 +11,7 @@ export default class Image extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       preview: null,
     };
   }
@@ -33,10 +34,12 @@ export default class Image extends React.Component {
     }
     const [image] = value;
     if (image) {
+      this.props.onLoadingStart();
       const { data: upload } = await request({
         method: 'GET',
         path: `/1/uploads/${image.upload}`,
       });
+      this.props.onLoadingStop();
       this.setState({
         preview: upload,
       });
@@ -49,6 +52,7 @@ export default class Image extends React.Component {
 
     const { sizes } = this.props;
 
+    this.props.onLoadingStart();
     const { data: set } = await request({
       method: 'POST',
       path: '/1/site/create-images',
@@ -57,6 +61,7 @@ export default class Image extends React.Component {
       },
       files,
     });
+    this.props.onLoadingStop();
     const value = {
       ...set,
       images: set.images.map((image) => {
@@ -87,7 +92,12 @@ export default class Image extends React.Component {
     return (
       <Field label={label}>
         {this.renderPreview()}
-        <input {...rest} type="file" accept="image/*" onChange={this.onChange} />
+        <input
+          {...rest}
+          type="file"
+          accept="image/*"
+          onChange={this.onChange}
+        />
       </Field>
     );
   }
@@ -112,8 +122,12 @@ export default class Image extends React.Component {
 Image.propTypes = {
   sizes: PropTypes.arrayOf(PropTypes.number),
   value: PropTypes.arrayOf(PropTypes.object),
+  onLoadingStart: PropTypes.func,
+  onLoadingStop: PropTypes.func,
 };
 
 Image.defaultProps = {
   sizes: [],
+  onLoadingStart: noop,
+  onLoadingStop: noop,
 };
