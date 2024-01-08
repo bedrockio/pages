@@ -14,8 +14,22 @@ export default class Select extends React.Component {
     return [this.isDisabled() ? 'disabled' : null];
   }
 
+  getOptions() {
+    let { options } = this.props;
+    if (!Array.isArray(options)) {
+      options = Object.entries(options).map(([key, value]) => {
+        return {
+          value: key,
+          label: value,
+        };
+      });
+    }
+    return options;
+  }
+
   isDisabled() {
-    const { disabled, options } = this.props;
+    const { disabled } = this.props;
+    const options = this.getOptions();
     return disabled || !options.length;
   }
 
@@ -46,7 +60,9 @@ export default class Select extends React.Component {
   }
 
   renderPlaceholder() {
-    const { value, options, placeholder } = this.props;
+    const { value, placeholder } = this.props;
+
+    const options = this.getOptions();
     const selected = options.find((option) => {
       return option.value === value;
     });
@@ -62,7 +78,8 @@ export default class Select extends React.Component {
   }
 
   renderNative() {
-    const { name, options, placeholder } = this.props;
+    const { name, placeholder } = this.props;
+    const options = this.getOptions();
     return (
       <select name={name} onChange={this.onChange} defaultValue="">
         <option value="" disabled>
@@ -82,12 +99,15 @@ export default class Select extends React.Component {
 }
 
 Select.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ),
+  options: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+      }),
+    ),
+    PropTypes.object,
+  ]),
   onChange: PropTypes.func,
   setValue: PropTypes.func,
   placeholder: PropTypes.string,
