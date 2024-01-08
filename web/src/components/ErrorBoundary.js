@@ -25,8 +25,11 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     const { error } = this.state;
-    const { fallback, children } = this.props;
+    let { fallback, children } = this.props;
     if (error) {
+      fallback = React.cloneElement(fallback, {
+        error,
+      });
       return <PathChange onChange={this.dismiss}>{fallback}</PathChange>;
     } else {
       return children;
