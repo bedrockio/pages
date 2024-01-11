@@ -28,12 +28,9 @@ export default class Field extends React.Component {
   }
 
   render() {
-    const { label, error, children, ...rest } = this.props;
+    const { children } = this.props;
     return (
-      <fieldset
-        {...rest}
-        disabled={this.getDisabled()}
-        className={this.getBlockClass()}>
+      <fieldset disabled={this.getDisabled()} className={this.getBlockClass()}>
         {this.renderLabel()}
         {children}
         {this.renderError()}
