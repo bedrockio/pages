@@ -7,10 +7,9 @@ import Field from './Field';
 
 export default class FormSelect extends React.Component {
   render() {
-    const { label, className, ...rest } = this.props;
     return (
-      <Field label={label} className={className}>
-        <Select {...rest} />
+      <Field {...this.props}>
+        <Select {...this.props} />
       </Field>
     );
   }

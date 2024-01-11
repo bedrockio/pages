@@ -4,6 +4,22 @@
   flex-flow: column;
   gap: 10px;
 
+  .field {
+    &--error {
+      color: #d81313;
+    }
+
+    .error {
+      color: #d81313;
+      font-size: 0.8em;
+    }
+  }
+
+  label .required {
+    margin-left: 0.1em;
+    color: #d81313;
+  }
+
   &--disabled label {
     opacity: 0.5;
   }

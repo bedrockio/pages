@@ -7,10 +7,9 @@ import Field from './Field';
 
 export default class FormInput extends React.Component {
   render() {
-    const { label, className, ...rest } = this.props;
     return (
-      <Field label={label} className={className}>
-        <Input {...rest} />
+      <Field {...this.props}>
+        <Input {...this.props} />
       </Field>
     );
   }
