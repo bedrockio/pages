@@ -1,7 +1,7 @@
 .spinner {
   overflow: hidden;
 
-  --color: #5997be;
+  --size: 30px;
   --thickness: 5px;
 
   &:not(.spinner--inline) {
@@ -18,8 +18,8 @@
   }
 
   svg {
-    width: 30px;
-    height: 30px;
+    width: var(--size);
+    height: var(--size);
     animation: spin 2s linear infinite;
   }
 
@@ -27,7 +27,7 @@
     // Determined through experimentation.
     --dasharray: calc(155px - var(--thickness) * 3);
     animation: ring 2s ease-in-out infinite;
-    stroke: var(--color);
+    stroke: currentColor;
     stroke-dasharray: var(--dasharray);
     stroke-width: var(--thickness);
     r: calc(25px - var(--thickness) / 2);

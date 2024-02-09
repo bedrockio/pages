@@ -9,6 +9,7 @@ export { default as Input } from 'components/Input';
 export { default as Modal } from 'components/Modal';
 export { default as Button } from 'components/Button';
 export { default as Spacer } from 'components/Spacer';
+export { default as Spinner } from 'components/Spinner';
 export { default as Collection } from 'components/Collection';
 export { default as ServerError } from 'components/ServerError';
 export { default as LoginButton } from 'components/LoginButton';
