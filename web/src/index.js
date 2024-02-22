@@ -13,6 +13,7 @@ export { default as Spinner } from 'components/Spinner';
 export { default as Collection } from 'components/Collection';
 export { default as ServerError } from 'components/ServerError';
 export { default as LoginButton } from 'components/LoginButton';
+export { default as ExternalLink } from 'components/ExternalLink';
 export { default as ErrorBoundary } from 'components/ErrorBoundary';
 
 export { default as PageProvider } from 'providers/PageProvider';
