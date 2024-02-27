@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import Icon from 'components/Icon';
 
 import bem from 'utils/bem';
-import { hasToken } from 'utils/api';
+import { canEdit } from 'utils/editor';
 
 import './login-button.less';
 
 @bem
 export default class LoginButton extends React.Component {
   render() {
-    if (hasToken()) {
+    if (canEdit()) {
       return null;
     }
     return (

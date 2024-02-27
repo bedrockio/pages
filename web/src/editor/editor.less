@@ -6,3 +6,21 @@
 [data-collection-name] {
   cursor: pointer;
 }
+
+[data-collection-name] {
+  --size: 6px;
+  --color: rgb(255 0 0 / 10%);
+
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color) 0px,
+    var(--color) var(--size),
+    transparent var(--size),
+    transparent calc(var(--size) * 2)
+  );
+}

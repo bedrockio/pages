@@ -4,6 +4,8 @@ import { omit, mapValues } from 'lodash';
 
 import { useData } from 'stores/data';
 
+import { canEdit } from 'utils/editor';
+
 import Field from './Field';
 
 const propTypes = {
@@ -57,10 +59,18 @@ function Collection(props, ref) {
     }
   }
 
+  function getEditProps() {
+    if (canEdit()) {
+      return {
+        'data-collection-name': name,
+      };
+    }
+  }
+
   const elProps = omit(props, Object.keys(propTypes));
 
   return (
-    <div {...elProps} ref={ref} data-collection-name={name}>
+    <div {...elProps} {...getEditProps()} ref={ref}>
       {renderItems()}
     </div>
   );

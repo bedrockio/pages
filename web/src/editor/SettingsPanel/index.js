@@ -9,10 +9,10 @@ import Tab from 'components/Tab';
 
 import bem from 'utils/bem';
 
-import Trigger from './Trigger';
-import Pages from './Pages';
-import Publish from './Publish';
-import Revert from './Revert';
+import Trigger from '../Trigger';
+import Publish from '../Publish';
+import Revert from '../Revert';
+import Pages from '../Pages';
 
 import './settings-panel.less';
 

@@ -8,7 +8,7 @@ import Button from 'components/Button';
 
 import bem from 'utils/bem';
 
-import EditField from './EditField';
+import EditField from '../EditField';
 
 import './edit-field-modal.less';
 

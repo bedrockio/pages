@@ -7,8 +7,9 @@ import { omit } from 'lodash';
 import { DataContext } from 'stores/data';
 
 import ExternalLink from 'components/ExternalLink';
-
 import Image from 'components/Image';
+
+import { canEdit } from 'utils/editor';
 
 function convertLinks(props) {
   const { href, children } = props;
@@ -33,11 +34,19 @@ export default class Field extends React.Component {
 
   getProps() {
     const props = omit(this.props, Object.keys(Field.propTypes));
-    const { name } = this.props;
     return {
       ...props,
-      'data-field-name': name,
+      ...this.getEditProps(),
     };
+  }
+
+  getEditProps() {
+    if (canEdit()) {
+      const { name } = this.props;
+      return {
+        'data-field-name': name,
+      };
+    }
   }
 
   getFallback() {

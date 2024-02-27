@@ -1,10 +1,11 @@
 import React from 'react';
 
+
 import { DataContext } from 'stores/data';
 
 import Icon from 'components/Icon';
 
-import { hasToken } from 'utils/api';
+import { canEdit } from 'utils/editor';
 
 import SettingsPanel from './SettingsPanel';
 import EditFieldModal from './EditFieldModal';
@@ -27,7 +28,7 @@ export default class Editor extends React.Component {
   }
 
   render() {
-    if (!hasToken()) {
+    if (!canEdit()) {
       return null;
     }
     return (

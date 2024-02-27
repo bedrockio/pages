@@ -10,8 +10,8 @@ import Button from 'components/Button';
 import bem from 'utils/bem';
 import { replaceElement, removeElement } from 'utils/array';
 
-import EditField from './EditField';
-import OrderCollectionModal from './OrderCollectionModal';
+import EditField from '../EditField';
+import OrderCollectionModal from '../OrderCollectionModal';
 
 import './edit-collection-modal.less';
 
