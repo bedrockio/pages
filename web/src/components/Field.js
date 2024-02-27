@@ -9,6 +9,7 @@ import { DataContext } from 'stores/data';
 import ExternalLink from 'components/ExternalLink';
 import Image from 'components/Image';
 
+import { urlForUpload } from 'utils/uploads';
 import { canEdit } from 'utils/editor';
 
 function convertLinks(props) {
@@ -60,6 +61,8 @@ export default class Field extends React.Component {
     const value = this.getValue();
     if (type.startsWith('image')) {
       return this.renderImage(value);
+    } else if (type === 'upload') {
+      return this.renderUpload(value);
     } else {
       return this.renderText(value);
     }
@@ -70,6 +73,19 @@ export default class Field extends React.Component {
       return <Image set={set} {...this.getProps()} />;
     } else {
       return <span {...this.getProps()}>{this.getFallback()}</span>;
+    }
+  }
+
+  renderUpload(value) {
+    const { children } = this.props;
+    if (value) {
+      return (
+        <ExternalLink href={urlForUpload(value.id)} {...this.getProps()}>
+          {children}
+        </ExternalLink>
+      );
+    } else {
+      return <span {...this.getProps()}>{children}</span>;
     }
   }
 

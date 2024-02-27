@@ -147,12 +147,6 @@ export default class EditCollectionModal extends React.Component {
         </Modal.Content>
         <Modal.Actions>
           <Modal.Actions left>
-            <Form.Button
-              small
-              onClick={this.onAddClick}
-              disabled={items.length >= collection.limit}>
-              Add Item
-            </Form.Button>
             <OrderCollectionModal
               items={items}
               collection={collection}
@@ -166,6 +160,12 @@ export default class EditCollectionModal extends React.Component {
                 </Form.Button>
               }
             />
+            <Form.Button
+              small
+              onClick={this.onAddClick}
+              disabled={items.length >= collection.limit}>
+              Add Item
+            </Form.Button>
           </Modal.Actions>
           <Button onClick={this.onClose}>Cancel</Button>
           <Button form="edit-collection" primary onClick={this.onSubmit}>

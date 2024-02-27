@@ -71,16 +71,6 @@ export default class Pages extends React.Component {
     });
   };
 
-  routeExists = (path) => {
-    const { selectedIndex } = this.state;
-    const { pages, getRouteUrls } = this.context;
-    const selectedPage = pages[selectedIndex];
-    const urls = getRouteUrls().filter((url) => {
-      return url !== selectedPage?.path;
-    });
-    return urls.includes(path);
-  };
-
   onSubmit = async () => {
     const { selectedIndex, selected } = this.state;
     const { pages } = this.context;
@@ -97,8 +87,6 @@ export default class Pages extends React.Component {
         throw new Error('Path required.');
       } else if (!selected.path.startsWith('/')) {
         throw new Error('Path must start with a slash.');
-      } else if (this.routeExists(selected.path)) {
-        throw new Error('Path already exists.');
       }
       if (selectedIndex != null) {
         this.context.updatePage(selectedIndex, selected);
@@ -165,10 +153,32 @@ export default class Pages extends React.Component {
     if (selected) {
       return (
         <React.Fragment>
-          <Form.Input name="name" label="Name" value={selected.name} onChange={this.setField} autoFocus />
-          <Form.Input name="path" label="Path" value={selected.path} onChange={this.setField} />
-          <Form.Select name="type" label="Type" options={PAGE_TYPES} value={selected.type} onChange={this.setField} />
-          <Form.Toggle name="nav" label="Show in Nav" value={selected.nav} onChange={this.setField} />
+          <Form.Input
+            name="name"
+            label="Name"
+            value={selected.name}
+            onChange={this.setField}
+            autoFocus
+          />
+          <Form.Input
+            name="path"
+            label="Path"
+            value={selected.path}
+            onChange={this.setField}
+          />
+          <Form.Select
+            name="type"
+            label="Type"
+            options={PAGE_TYPES}
+            value={selected.type}
+            onChange={this.setField}
+          />
+          <Form.Toggle
+            name="nav"
+            label="Show in Nav"
+            value={selected.nav}
+            onChange={this.setField}
+          />
         </React.Fragment>
       );
     }
@@ -196,7 +206,7 @@ export default class Pages extends React.Component {
           {selectedIndex != null && (
             <Form.Actions left>
               <Form.Button small negative onClick={this.onRemoveClick}>
-                <Icon name="trash" />
+                <Icon name="trash editor" />
               </Form.Button>
             </Form.Actions>
           )}

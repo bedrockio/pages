@@ -13,6 +13,7 @@ import Input from './Input';
 import Select from './Select';
 import Button from './Button';
 import Toggle from './Toggle';
+import Upload from './Upload';
 import Actions from './Actions';
 import ImageSet from './ImageSet';
 
@@ -31,6 +32,7 @@ export default class Form extends React.Component {
   static Select = Select;
   static Button = Button;
   static Toggle = Toggle;
+  static Upload = Upload;
   static Actions = Actions;
   static ImageSet = ImageSet;
 
