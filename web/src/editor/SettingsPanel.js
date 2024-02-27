@@ -73,6 +73,7 @@ export default class SettingsPanel extends React.Component {
   }
 
   renderPanel() {
+    const { open } = this.state;
     return (
       <Modal
         open={open}

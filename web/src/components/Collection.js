@@ -1,12 +1,21 @@
 import React, { forwardRef } from 'react';
-import { mapValues } from 'lodash';
+import PropTypes from 'prop-types';
+import { omit, mapValues } from 'lodash';
 
 import { useData } from 'stores/data';
 
 import Field from './Field';
 
+const propTypes = {
+  name: PropTypes.string.isRequired,
+  render: PropTypes.func.isRequired,
+  fields: PropTypes.object.isRequired,
+  limit: PropTypes.number,
+  sizes: PropTypes.Object,
+};
+
 function Collection(props, ref) {
-  const { name, render, fields, limit, ...rest } = props;
+  const { name, render, fields, limit } = props;
 
   const { setCollection, getCollectionItems, getFieldValue, setFieldType } =
     useData();
@@ -48,8 +57,10 @@ function Collection(props, ref) {
     }
   }
 
+  const elProps = omit(props, Object.keys(propTypes));
+
   return (
-    <div {...rest} ref={ref} data-collection-name={name}>
+    <div {...elProps} ref={ref} data-collection-name={name}>
       {renderItems()}
     </div>
   );

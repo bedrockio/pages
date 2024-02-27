@@ -11,6 +11,7 @@ import bem from 'utils/bem';
 import { replaceElement, removeElement } from 'utils/array';
 
 import EditField from './EditField';
+import OrderCollectionModal from './OrderCollectionModal';
 
 import './edit-collection-modal.less';
 
@@ -35,6 +36,8 @@ export default class EditCollectionModal extends React.Component {
   componentWillUnmount() {
     document.documentElement.removeEventListener('click', this.onDocumentClick);
   }
+
+  // Events
 
   onDocumentClick = (evt) => {
     if (evt.target.closest('a,[tabindex]')) {
@@ -61,14 +64,54 @@ export default class EditCollectionModal extends React.Component {
     });
   };
 
-  onValueChange = (evt) => {
+  onAddClick = () => {
     this.setState({
-      field: {
-        ...this.state.field,
-        value: evt.target.value,
-      },
+      items: [...this.state.items, {}],
+    });
+    setTimeout(this.scrollToBottom, 16);
+  };
+
+  onLoadingStart = () => {
+    this.setState({
+      loading: true,
     });
   };
+
+  onLoadingStop = () => {
+    this.setState({
+      loading: false,
+    });
+  };
+
+  onOrderChange = (items) => {
+    this.setState({
+      items,
+    });
+  };
+
+  // Util
+
+  scrollToBottom = () => {
+    const el = this.ref.current;
+    if (el) {
+      el.scrollTo({
+        top: el.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  updateItem(index, update) {
+    this.setState({
+      items: replaceElement(this.state.items, index, update),
+    });
+  }
+
+  removeItem(index) {
+    this.setState({
+      items: removeElement(this.state.items, index),
+    });
+  }
 
   onSubmit = () => {
     const { items } = this.state;
@@ -110,6 +153,19 @@ export default class EditCollectionModal extends React.Component {
               disabled={items.length >= collection.limit}>
               Add Item
             </Form.Button>
+            <OrderCollectionModal
+              items={items}
+              collection={collection}
+              onChange={this.onOrderChange}
+              trigger={
+                <Form.Button
+                  small
+                  onClick={this.onOrderClick}
+                  disabled={items.length < 2}>
+                  Order
+                </Form.Button>
+              }
+            />
           </Modal.Actions>
           <Button onClick={this.onClose}>Cancel</Button>
           <Button form="edit-collection" primary onClick={this.onSubmit}>
@@ -118,47 +174,6 @@ export default class EditCollectionModal extends React.Component {
         </Modal.Actions>
       </Modal>
     );
-  }
-
-  onAddClick = () => {
-    this.setState({
-      items: [...this.state.items, {}],
-    });
-    setTimeout(this.scrollToBottom, 16);
-  };
-
-  onLoadingStart = () => {
-    this.setState({
-      loading: true,
-    });
-  };
-
-  onLoadingStop = () => {
-    this.setState({
-      loading: false,
-    });
-  };
-
-  scrollToBottom = () => {
-    const el = this.ref.current;
-    if (el) {
-      el.scrollTo({
-        top: el.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  updateItem(index, update) {
-    this.setState({
-      items: replaceElement(this.state.items, index, update),
-    });
-  }
-
-  removeItem(index) {
-    this.setState({
-      items: removeElement(this.state.items, index),
-    });
   }
 
   renderItems() {

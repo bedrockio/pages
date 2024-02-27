@@ -1,0 +1,29 @@
+.foobar {
+  z-index: 100;
+}
+.order-collection-modal {
+  &__container {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .icon {
+      --size: 15px;
+      opacity: 0.5;
+    }
+  }
+
+  &__handle {
+    cursor: row-resize;
+  }
+
+  li {
+    list-style: none;
+  }
+}

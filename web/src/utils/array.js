@@ -9,3 +9,10 @@ export function removeElement(arr, index) {
   arr.splice(index, 1);
   return arr;
 }
+
+export function moveElement(arr, oldIndex, newIndex) {
+  arr = [...arr];
+  const [el] = arr.splice(oldIndex, 1);
+  arr.splice(newIndex, 0, el);
+  return arr;
+}
