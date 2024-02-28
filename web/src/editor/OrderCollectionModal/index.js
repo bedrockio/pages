@@ -8,6 +8,7 @@ import {
 import { DataContext } from 'stores/data';
 
 import Icon from 'components/Icon';
+import Image from 'components/Image';
 import Modal from 'components/Modal';
 import Button from 'components/Button';
 
@@ -17,7 +18,6 @@ import bem from 'utils/bem';
 
 const DragHandle = sortableHandle(({ className }) => {
   return <Icon className={className} name="bars editor" />;
-  // return <span className={className}>::</span>;
 });
 
 const SortableItem = sortableElement(({ children, className }) => {
@@ -93,12 +93,15 @@ export default class OrderCollectionModal extends React.Component {
     });
   };
 
-  getItemTitle(item) {
-    const field = item.title || item.name;
-    if (!field) {
-      throw new Error('Could not derive title for collection item.');
+  getItemTitle(item, num) {
+    if (item.image) {
+      return <Image set={item.image.value} sizes="50px" />;
     }
-    return field.value;
+    const field = item.title || item.name;
+    if (field) {
+      return field.value;
+    }
+    return num;
   }
 
   render() {
@@ -148,7 +151,7 @@ export default class OrderCollectionModal extends React.Component {
         className={this.getElementClass('container')}
         helperContainer={this.ref.current}>
         {items.map((item, i) => {
-          const title = this.getItemTitle(item);
+          const title = this.getItemTitle(item, i + 1);
           return (
             <SortableItem
               key={i}

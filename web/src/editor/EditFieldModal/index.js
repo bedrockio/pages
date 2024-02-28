@@ -20,6 +20,7 @@ export default class EditFieldModal extends React.Component {
     super(props);
     this.state = {
       field: null,
+      loading: false,
     };
   }
 
@@ -58,6 +59,18 @@ export default class EditFieldModal extends React.Component {
     });
   };
 
+  onLoadingStart = () => {
+    this.setState({
+      loading: true,
+    });
+  };
+
+  onLoadingStop = () => {
+    this.setState({
+      loading: false,
+    });
+  };
+
   onSubmit = () => {
     const { field } = this.state;
     this.context.updateField(field);
@@ -73,7 +86,7 @@ export default class EditFieldModal extends React.Component {
   };
 
   render() {
-    const { field } = this.state;
+    const { field, loading } = this.state;
     if (!field) {
       return null;
     }
@@ -81,8 +94,17 @@ export default class EditFieldModal extends React.Component {
       <Modal open className={this.getBlockClass()} onClose={this.onClose}>
         <Modal.Header>{this.renderTitle()}</Modal.Header>
         <Modal.Content>
-          <Form id="field" method="dialog" onSubmit={this.onSubmit}>
-            <EditField field={field} onChange={this.onFieldChange} />
+          <Form
+            id="field"
+            method="dialog"
+            loading={loading}
+            onSubmit={this.onSubmit}>
+            <EditField
+              field={field}
+              onChange={this.onFieldChange}
+              onLoadingStart={this.onLoadingStart}
+              onLoadingStop={this.onLoadingStop}
+            />
           </Form>
         </Modal.Content>
         <Modal.Actions>

@@ -68,6 +68,8 @@ export default class EditField extends React.Component {
         value={field.value}
         className={className}
         onChange={this.onUploadChange}
+        onLoadingStart={this.props.onLoadingStart}
+        onLoadingStop={this.props.onLoadingStop}
       />
     );
   }

@@ -135,7 +135,7 @@ export default class EditCollectionModal extends React.Component {
     }
     return (
       <Modal open className={this.getBlockClass()} onClose={this.onClose}>
-        <Modal.Header>Edit Collection</Modal.Header>
+        <Modal.Header>{this.renderTitle()}</Modal.Header>
         <Modal.Content ref={this.ref}>
           <Form
             id="edit-collection"
@@ -222,5 +222,11 @@ export default class EditCollectionModal extends React.Component {
         </div>
       );
     });
+  }
+
+  renderTitle() {
+    const { collection } = this.state;
+    const humanized = this.context.humanizeFieldName(collection.name);
+    return `Edit ${humanized}`;
   }
 }
