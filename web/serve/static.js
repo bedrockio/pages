@@ -3,7 +3,6 @@ const Koa = require('koa');
 const koaMount = require('koa-mount');
 
 const config = require('@bedrockio/config');
-const logger = require('@bedrockio/logger');
 
 const envMiddleware = require('./middleware/env');
 const assetsMiddleware = require('./middleware/assets');
@@ -20,7 +19,6 @@ app.use(healthCheckMiddleware);
 app
   .use(koaMount('/assets/', assetsMiddleware('./dist/assets')))
   .use(koaMount('/subfont/', assetsMiddleware('./dist/subfont')))
-  .use(logger.middleware())
   .use(envMiddleware())
   .use(templateMiddleware({ apps: ['/'] }));
 
