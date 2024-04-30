@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { omit, noop } from 'lodash';
+import { omit } from 'lodash';
 
 import ExternalLink from 'components/ExternalLink';
 
@@ -40,7 +40,7 @@ export default class Upload extends React.Component {
     }
     const values = Array.isArray(value) ? value : [value];
 
-    this.props.onLoadingStart();
+    this.props.onLoadingStart?.();
 
     const uploads = await Promise.all(
       values.map(async (value) => {
@@ -58,13 +58,13 @@ export default class Upload extends React.Component {
     this.setState({
       uploads,
     });
-    this.props.onLoadingStop();
+    this.props.onLoadingStop?.();
   };
 
   onChange = async (evt) => {
     const { name } = evt.target;
     const files = Array.from(evt.target.files);
-    this.props.onLoadingStart();
+    this.props.onLoadingStart?.();
     const { data: uploads } = await request({
       method: 'POST',
       path: '/1/site/create-uploads',
@@ -77,7 +77,7 @@ export default class Upload extends React.Component {
     } else {
       value = uploads[0];
     }
-    this.props.onLoadingStop();
+    this.props.onLoadingStop?.();
     if (this.props.setValue) {
       this.props.setValue(value);
     } else {
@@ -124,9 +124,4 @@ Upload.propTypes = {
   ]),
   onLoadingStart: PropTypes.func,
   onLoadingStop: PropTypes.func,
-};
-
-Upload.defaultProps = {
-  onLoadingStart: noop,
-  onLoadingStop: noop,
 };

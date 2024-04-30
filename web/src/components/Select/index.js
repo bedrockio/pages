@@ -60,7 +60,7 @@ export default class Select extends React.Component {
   }
 
   renderPlaceholder() {
-    const { value, placeholder } = this.props;
+    const { value = '', placeholder = 'Select' } = this.props;
 
     const options = this.getOptions();
     const selected = options.find((option) => {
@@ -111,9 +111,4 @@ Select.propTypes = {
   onChange: PropTypes.func,
   setValue: PropTypes.func,
   placeholder: PropTypes.string,
-};
-
-Select.defaultProps = {
-  placeholder: 'Select',
-  value: '',
 };

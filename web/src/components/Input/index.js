@@ -29,6 +29,7 @@ export default class Input extends React.Component {
     return (
       <input
         {...props}
+        value={props.value || ''}
         onChange={this.onChange}
         className={this.getBlockClass()}
       />
@@ -39,8 +40,4 @@ export default class Input extends React.Component {
 Input.propTypes = {
   onChange: PropTypes.func,
   setValue: PropTypes.func,
-};
-
-Input.defaultProps = {
-  value: '',
 };

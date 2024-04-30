@@ -5,7 +5,7 @@ import './spacer.less';
 const SIZES = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
 export default function Spacer(props) {
-  const { size } = props;
+  const { size = 'md' } = props;
   const named = SIZES.includes(size);
 
   const { className } = useClass('spacer', named ? size : null);
@@ -20,7 +20,3 @@ export default function Spacer(props) {
 
   return <div className={className} style={getStyles()} />;
 }
-
-Spacer.defaultProps = {
-  size: 'md',
-};

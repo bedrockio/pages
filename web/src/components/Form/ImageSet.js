@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { omit, noop } from 'lodash';
+import { omit } from 'lodash';
 
 import { request } from 'utils/api';
 import { urlForUpload } from 'utils/uploads';
@@ -34,12 +34,12 @@ export default class Image extends React.Component {
     }
     const [image] = value;
     if (image) {
-      this.props.onLoadingStart();
+      this.props.onLoadingStart?.();
       const { data: upload } = await request({
         method: 'GET',
         path: `/1/uploads/${image.upload}`,
       });
-      this.props.onLoadingStop();
+      this.props.onLoadingStop?.();
       this.setState({
         preview: upload,
       });
@@ -50,9 +50,9 @@ export default class Image extends React.Component {
     const { name } = evt.target;
     const files = Array.from(evt.target.files);
 
-    const { sizes } = this.props;
+    const { sizes = [] } = this.props;
 
-    this.props.onLoadingStart();
+    this.props.onLoadingStart?.();
     const { data: set } = await request({
       method: 'POST',
       path: '/1/site/create-images',
@@ -61,7 +61,7 @@ export default class Image extends React.Component {
       },
       files,
     });
-    this.props.onLoadingStop();
+    this.props.onLoadingStop?.();
     const value = {
       ...set,
       images: set.images.map((image) => {
@@ -124,10 +124,4 @@ Image.propTypes = {
   value: PropTypes.arrayOf(PropTypes.object),
   onLoadingStart: PropTypes.func,
   onLoadingStop: PropTypes.func,
-};
-
-Image.defaultProps = {
-  sizes: [],
-  onLoadingStart: noop,
-  onLoadingStop: noop,
 };

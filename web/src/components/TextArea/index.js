@@ -29,6 +29,7 @@ export default class TextArea extends React.Component {
     return (
       <textarea
         {...props}
+        value={props.value || ''}
         onChange={this.onChange}
         className={this.getBlockClass()}
       />
@@ -39,8 +40,4 @@ export default class TextArea extends React.Component {
 TextArea.propTypes = {
   onChange: PropTypes.func,
   setValue: PropTypes.func,
-};
-
-TextArea.defaultProps = {
-  value: '',
 };

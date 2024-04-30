@@ -25,7 +25,7 @@ export default class Field extends React.Component {
   static contextType = DataContext;
 
   componentDidMount() {
-    const { name, type } = this.props;
+    const { name, type = 'string' } = this.props;
     this.context.setFieldType(name, type);
   }
 
@@ -132,8 +132,4 @@ Field.propTypes = {
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   type: PropTypes.string,
   fallback: PropTypes.string,
-};
-
-Field.defaultProps = {
-  type: 'string',
 };
