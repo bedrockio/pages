@@ -1062,9 +1062,9 @@
   integrity sha512-jfOcZIs63S0GaWQjh5vVIISr4b2vA0CWgm630N0FDB6wlW+O0Fsjox92Agx5nggVpSnNYWqzjuKaUb5RY3/ECw==
 
 "@bedrockio/pages-utils@^0.1.36":
-  version "0.1.36"
-  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.1.36.tgz#c1f6aa8a1d4d956e6e70c780e504db4a9e43146c"
-  integrity sha512-ZDBS4lHPwtcCdzYlZ6ai3Tni17QMqOmFxl+L2nGbjIA0rV9WW1a32LXiMgOrJkuq2AOzs0vXkzxT1Bx3U8DDEw==
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.1.37.tgz#bd6881e5c6d1fc6f5d010afc33f69c128c6f36fc"
+  integrity sha512-QHSciDVuWWvtpB6oyu73MUAdbLhcQFFiKMRD3axqG1TOLHK1GuOk9KxPuVfOkeUYJuxROwbCAkd8LJmm+LKfkA==
   dependencies:
     lodash "^4.17.21"
     sharp "^0.32.6"
@@ -4181,7 +4181,7 @@ html-minifier@^4.0.0:
     relateurl "^0.2.7"
     uglify-js "^3.5.1"
 
-html-webpack-plugin@^5.5.0:
+html-webpack-plugin@^5.5.0, html-webpack-plugin@^5.6.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-5.6.0.tgz#50a8fa6709245608cb00e811eacecb8e0d7b7ea0"
   integrity sha512-iwaY4wzbe48AfKLZ/Cc8k0L+FKG6oSNRaZ8x5A/T/IVDGyXcbHncM9TdDa93wn0FsSm82FhTKW7f3vS61thXAw==
