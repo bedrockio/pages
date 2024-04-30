@@ -7,13 +7,11 @@ const path = require('path');
 const subfont = require('subfont');
 const webpack = require('webpack');
 
-const { Command } = require('commander');
+const { program } = require('commander');
 
 const fetchData = require('../fetch-data');
 
 // Args
-
-const program = new Command();
 
 program
   .name('build-site')

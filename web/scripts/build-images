@@ -3,7 +3,7 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-const { Command } = require('commander');
+const { program } = require('commander');
 const { createImageSet } = require('@bedrockio/pages-utils');
 
 const SIZES = [300, 600, 1200];
@@ -12,8 +12,6 @@ const INPUT_DIR = '.';
 const OUTPUT_DIR = 'src/assets/images/sets';
 
 // Args
-
-const program = new Command();
 
 program
   .name('build-images')
