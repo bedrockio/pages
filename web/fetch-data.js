@@ -1,7 +1,15 @@
 const config = require('@bedrockio/config');
 
-async function fetchData(url) {
-  url ||= new URL('/1/site', config.get('API_URL'));
+const API_URL = config.get('API_URL');
+async function fetchData() {
+  console.info('WHAT AM I', API_URL);
+
+  if (!API_URL) {
+    return {};
+  }
+
+  const url = new URL('/1/site', config.get('API_URL'));
+
   try {
     const ret = await fetch(url);
     let json;

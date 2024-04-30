@@ -1,13 +1,12 @@
 const fetchData = require('../../fetch-data');
 
-function dataMiddleware(options) {
-  const { url } = options;
+function dataMiddleware() {
   return async (ctx, next) => {
     await next();
     if (ctx.url === '/') {
       let data;
       try {
-        data = await fetchData(url);
+        data = await fetchData();
         data = JSON.stringify(data);
       } catch (error) {
         data = `new Error('${error.message}')`;
