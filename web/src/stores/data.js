@@ -5,6 +5,7 @@ import { request } from 'utils/api';
 
 import { replaceElement, removeElement } from 'utils/array';
 import { localStorage } from 'utils/storage';
+import { window } from 'utils/platform';
 
 export const DataContext = React.createContext();
 
@@ -249,9 +250,7 @@ function hasLocal() {
 }
 
 function getData() {
-  if (typeof window !== 'undefined') {
-    return window.__DATA__ || {};
-  }
+  return window.__DATA__ || {};
 }
 
 // Field: "name"

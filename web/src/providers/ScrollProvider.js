@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
 import { onChange } from 'utils/hooks';
+import { window } from 'utils/platform';
 
 export default function (props) {
   const location = useLocation();
