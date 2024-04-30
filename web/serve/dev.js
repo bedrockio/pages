@@ -70,11 +70,14 @@ const app = new Koa();
   const wrappedHotMiddleware = e2k(webpackHotMiddleware(compiler));
 
   app.use(envMiddleware());
-  app.use(
-    dataMiddleware({
-      url: new URL('/1/site', API_URL),
-    }),
-  );
+
+  if (API_URL) {
+    app.use(
+      dataMiddleware({
+        url: new URL('/1/site', API_URL),
+      }),
+    );
+  }
   app.use(
     historyMiddleware({
       apps: ['/'],

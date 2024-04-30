@@ -16,7 +16,7 @@ export function DataProvider(props) {
   if (props.data instanceof Error) {
     throw props.data;
   }
-  const [data, setData] = useState(getLocal() || props.data);
+  const [data, setData] = useState(getLocal() || props.data || getData());
   const [publishing, setPublishing] = useState(false);
 
   // Fields
@@ -228,10 +228,6 @@ export function DataProvider(props) {
   );
 }
 
-DataProvider.defaultProps = {
-  data: getData(),
-};
-
 const DEFAULT_SIZE = 500;
 const RATIOS = [1, 2, 3];
 
@@ -253,7 +249,9 @@ function hasLocal() {
 }
 
 function getData() {
-  return typeof window !== 'undefined' && window.__DATA__;
+  if (typeof window !== 'undefined') {
+    return window.__DATA__ || {};
+  }
 }
 
 // Field: "name"
