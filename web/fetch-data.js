@@ -2,8 +2,6 @@ const config = require('@bedrockio/config');
 
 const API_URL = config.get('API_URL');
 async function fetchData() {
-  console.info('WHAT AM I', API_URL);
-
   if (!API_URL) {
     return {};
   }
