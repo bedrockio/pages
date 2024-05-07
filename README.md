@@ -14,6 +14,10 @@ yarn install @bedrockio/pages
 
 ## Deployment
 
+### Google Cloud
+
+In GCP, deploying a new version requires the default service account to have the ability to patch deployments. This can be added by applying [the app-deployer role](api/deployer-role.yml) to your kubernetes cluster.
+
 ### Cloudflare Pages
 
 To deploy to Cloudflare Pages your project should use Yarn v3, otherwise the `sharp` binary in `favicons` may not deploy correctly.
