@@ -90,6 +90,7 @@ export default class EditField extends React.Component {
     const { field, label, className } = this.props;
     return (
       <Form.Text
+        rows={20}
         label={label}
         value={field.value || ''}
         className={className}

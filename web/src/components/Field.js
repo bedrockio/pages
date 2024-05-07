@@ -25,7 +25,7 @@ export default class Field extends React.Component {
   static contextType = DataContext;
 
   componentDidMount() {
-    const { name, type = 'string' } = this.props;
+    const { name, type } = this.props;
     this.context.setFieldType(name, type);
   }
 
@@ -107,7 +107,11 @@ export default class Field extends React.Component {
       } else {
         options.forceInline = true;
       }
-      content = <Markdown options={options}>{content}</Markdown>;
+      content = (
+        <Markdown options={options} className="markdown">
+          {content}
+        </Markdown>
+      );
     }
     return (
       <Element {...this.getProps()}>{content || this.getFallback()}</Element>
@@ -132,4 +136,8 @@ Field.propTypes = {
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   type: PropTypes.string,
   fallback: PropTypes.string,
+};
+
+Field.defaultProps = {
+  type: 'string',
 };
