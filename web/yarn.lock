@@ -1061,10 +1061,10 @@
   resolved "https://registry.yarnpkg.com/@bedrockio/config/-/config-2.2.3.tgz#bac37d12e36a99ec16668c8b5d1e05dec9658fa9"
   integrity sha512-jfOcZIs63S0GaWQjh5vVIISr4b2vA0CWgm630N0FDB6wlW+O0Fsjox92Agx5nggVpSnNYWqzjuKaUb5RY3/ECw==
 
-"@bedrockio/pages-utils@^0.1.43":
-  version "0.1.43"
-  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.1.43.tgz#e2fb5ae4092c7bdd64c12bcd2ddf52b5d0d2ebee"
-  integrity sha512-KH6evwJB/nO9BwhENRRTedhF1R5TxLAtwJwI/0pwYYvxqTidj31M7YPvJe1IQXyUiYbGTIw+v2BuOe8vec2/mA==
+"@bedrockio/pages-utils@^0.1.46":
+  version "0.1.46"
+  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.1.46.tgz#aaf55140363a90036c1d5a23a429697cdc0cb934"
+  integrity sha512-wSdK2XWqIbsvw+Fd1wryuLNjaSaTjHc+lTFQFMucFc7uVgSXeCyVeyAEQRP7yDflH9h8nTGpsicHYBLWFaZv2Q==
   dependencies:
     lodash "^4.17.21"
     sharp "^0.32.6"

@@ -1,6 +1,6 @@
 {
   "license": "MIT",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "name": "@bedrockio/pages-utils",
   "main": "./src/index.js",
   "scripts": {
