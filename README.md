@@ -12,6 +12,13 @@ Bedrock utilities for static site generation.
 yarn install @bedrockio/pages
 ```
 
+> [!WARNING]
+> When installing using Yarn v1 you may get errors due to the `sharp` binary not installing correctly. To fix this use:
+
+```bash
+yarn install @bedrockio/pages --ignore-engines
+```
+
 ## Deployment
 
 ### Google Cloud
