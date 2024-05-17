@@ -114,7 +114,7 @@ module.exports = {
       patterns: [
         {
           from: path.resolve('src/public'),
-          to: path.resolve('dist/'),
+          noErrorOnMissing: true,
         },
       ],
     }),

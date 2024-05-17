@@ -107,15 +107,16 @@ export default class Field extends React.Component {
       } else {
         options.forceInline = true;
       }
-      content = (
-        <Markdown options={options} className="markdown">
+      return (
+        <Markdown {...this.getProps()} options={options} className="markdown">
           {content}
         </Markdown>
       );
+    } else {
+      return (
+        <Element {...this.getProps()}>{content || this.getFallback()}</Element>
+      );
     }
-    return (
-      <Element {...this.getProps()}>{content || this.getFallback()}</Element>
-    );
   }
 
   renderWithBreaks(str) {
