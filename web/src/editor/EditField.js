@@ -55,6 +55,7 @@ export default class EditField extends React.Component {
         onChange={this.onImageChange}
         onLoadingStart={this.props.onLoadingStart}
         onLoadingStop={this.props.onLoadingStop}
+        onError={this.props.onError}
         className={className}
       />
     );
@@ -70,6 +71,7 @@ export default class EditField extends React.Component {
         onChange={this.onUploadChange}
         onLoadingStart={this.props.onLoadingStart}
         onLoadingStop={this.props.onLoadingStop}
+        onError={this.props.onError}
       />
     );
   }

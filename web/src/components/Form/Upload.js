@@ -65,31 +65,35 @@ export default class Upload extends React.Component {
     const { name } = evt.target;
     const files = Array.from(evt.target.files);
     this.props.onLoadingStart?.();
-    const { data: uploads } = await request({
-      method: 'POST',
-      path: '/1/site/create-uploads',
-      files,
-    });
-
-    let value;
-    if (this.isMultiple()) {
-      value = uploads;
-    } else {
-      value = uploads[0];
-    }
-    this.props.onLoadingStop?.();
-    if (this.props.setValue) {
-      this.props.setValue(value);
-    } else {
-      this.props.onChange({
-        evt,
-        name,
-        value,
+    try {
+      const { data: uploads } = await request({
+        method: 'POST',
+        path: '/1/site/create-uploads',
+        files,
       });
+
+      let value;
+      if (this.isMultiple()) {
+        value = uploads;
+      } else {
+        value = uploads[0];
+      }
+      this.props.onLoadingStop?.();
+      if (this.props.setValue) {
+        this.props.setValue(value);
+      } else {
+        this.props.onChange({
+          evt,
+          name,
+          value,
+        });
+      }
+      this.setState({
+        uploads,
+      });
+    } catch (error) {
+      this.props.onError?.(error);
     }
-    this.setState({
-      uploads,
-    });
   };
 
   render() {

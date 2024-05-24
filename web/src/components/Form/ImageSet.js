@@ -53,37 +53,42 @@ export default class Image extends React.Component {
     const { sizes = [] } = this.props;
 
     this.props.onLoadingStart?.();
-    const { data: set } = await request({
-      method: 'POST',
-      path: '/1/site/create-images',
-      body: {
-        sizes,
-      },
-      files,
-    });
-    this.props.onLoadingStop?.();
-    const value = {
-      ...set,
-      images: set.images.map((image) => {
-        return {
-          ...image,
-          upload: image.upload.id,
-        };
-      }),
-    };
-    if (this.props.setValue) {
-      this.props.setValue(value);
-    } else {
-      this.props.onChange({
-        evt,
-        name,
-        value,
+
+    try {
+      const { data: set } = await request({
+        method: 'POST',
+        path: '/1/site/create-images',
+        body: {
+          sizes,
+        },
+        files,
       });
+      this.props.onLoadingStop?.();
+      const value = {
+        ...set,
+        images: set.images.map((image) => {
+          return {
+            ...image,
+            upload: image.upload.id,
+          };
+        }),
+      };
+      if (this.props.setValue) {
+        this.props.setValue(value);
+      } else {
+        this.props.onChange({
+          evt,
+          name,
+          value,
+        });
+      }
+      const [first] = value.images;
+      this.setState({
+        preview: first.upload,
+      });
+    } catch (error) {
+      this.props.onError?.(error);
     }
-    const [first] = value.images;
-    this.setState({
-      preview: first.upload,
-    });
   };
 
   render() {

@@ -5,6 +5,7 @@ import { DataContext } from 'stores/data';
 import Modal from 'components/Modal';
 import Form from 'components/Form';
 import Button from 'components/Button';
+import Message from 'components/Message';
 
 import bem from 'utils/bem';
 
@@ -20,6 +21,7 @@ export default class EditFieldModal extends React.Component {
     super(props);
     this.state = {
       field: null,
+      error: null,
       loading: false,
     };
   }
@@ -61,12 +63,20 @@ export default class EditFieldModal extends React.Component {
 
   onLoadingStart = () => {
     this.setState({
+      error: null,
       loading: true,
     });
   };
 
   onLoadingStop = () => {
     this.setState({
+      loading: false,
+    });
+  };
+
+  onError = (error) => {
+    this.setState({
+      error,
       loading: false,
     });
   };
@@ -86,7 +96,7 @@ export default class EditFieldModal extends React.Component {
   };
 
   render() {
-    const { field, loading } = this.state;
+    const { field, loading, error } = this.state;
     if (!field) {
       return null;
     }
@@ -99,11 +109,13 @@ export default class EditFieldModal extends React.Component {
             method="dialog"
             loading={loading}
             onSubmit={this.onSubmit}>
+            {error && <Message error>{error.message}</Message>}
             <EditField
               field={field}
               onChange={this.onFieldChange}
               onLoadingStart={this.onLoadingStart}
               onLoadingStop={this.onLoadingStop}
+              onError={this.onError}
             />
           </Form>
         </Modal.Content>
