@@ -39,7 +39,7 @@ async function fitText(el) {
   if (parent) {
     let px = parseInt(window.getComputedStyle(el).fontSize);
     while (px > FONT_MIN && parent.scrollHeight > parent.clientHeight) {
-      px -= 2;
+      px -= 4;
       el.style.fontSize = `${px}px`;
     }
   }

@@ -10,14 +10,14 @@ import Field from './Field';
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
+  renderItem: PropTypes.func,
   limit: PropTypes.number,
   sizes: PropTypes.Object,
 };
 
 function Collection(props, ref) {
-  const { name, render, fields, limit } = props;
+  const { name, children, renderItem, fields, limit } = props;
 
   const { setCollection, getCollectionItems, getFieldValue, setFieldType } =
     useData();
@@ -29,33 +29,51 @@ function Collection(props, ref) {
 
   const items = getCollectionItems(name);
 
+  function render() {
+    const elProps = omit(props, Object.keys(propTypes));
+    return (
+      <div {...elProps} {...getEditProps()} ref={ref}>
+        {renderItems()}
+      </div>
+    );
+  }
+
   function renderItems() {
-    if (items.length) {
-      return items.map((item, i) => {
-        const renderProps = mapValues(item, (field, key) => {
-          const { name } = field;
-          const type = fields[key];
-          setFieldType(name, type);
-          return <Field name={name} type={type} />;
-        });
+    if (!items.length) {
+      return 'No Items';
+    }
+    const mapped = items.map((item, i) => {
+      const renderProps = mapValues(item, (field, key) => {
+        const { name } = field;
+        const type = fields[key];
+        setFieldType(name, type);
+        return <Field name={name} type={type} />;
+      });
 
-        let data = mapValues(item, (field) => {
-          const { name } = field;
-          return getFieldValue(name);
-        });
+      let data = mapValues(item, (field) => {
+        const { name } = field;
+        return getFieldValue(name);
+      });
 
-        data = {
-          ...data,
-          index: i,
-          number: i + 1,
-        };
+      data = {
+        ...data,
+        index: i,
+        number: i + 1,
+      };
 
-        return (
-          <React.Fragment key={i}>{render(renderProps, data)}</React.Fragment>
-        );
+      return [renderProps, data];
+    });
+
+    if (typeof children === 'function') {
+      return children(mapped);
+    } else if (typeof renderItem === 'function') {
+      return mapped.map((mapped, i) => {
+        return <React.Fragment key={i}>{renderItem(...mapped)}</React.Fragment>;
       });
     } else {
-      return 'No Items';
+      throw new Error(
+        'Collection component requires renderItem or children as a function.',
+      );
     }
   }
 
@@ -67,13 +85,7 @@ function Collection(props, ref) {
     }
   }
 
-  const elProps = omit(props, Object.keys(propTypes));
-
-  return (
-    <div {...elProps} {...getEditProps()} ref={ref}>
-      {renderItems()}
-    </div>
-  );
+  return render();
 }
 
 export default forwardRef(Collection);
