@@ -1,6 +1,6 @@
 {
   "name": "@bedrockio/pages-api",
-  "version": "0.1.51",
+  "version": "0.1.52",
   "license": "MIT",
   "scripts": {
     "lint": "eslint",
@@ -14,7 +14,7 @@
     "./models": "./src/models/index.js"
   },
   "dependencies": {
-    "@bedrockio/pages-utils": "^0.1.51",
+    "@bedrockio/pages-utils": "^0.1.52",
     "@kubernetes/client-node": "^0.20.0"
   },
   "peerDependencies": {
@@ -39,7 +39,7 @@
     "typescript": "^5.2.2"
   },
   "volta": {
-    "node": "20.12.2",
-    "yarn": "1.22.19"
+    "node": "22.13.0",
+    "yarn": "1.22.22"
   }
 }
