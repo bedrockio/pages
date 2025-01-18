@@ -1,6 +1,5 @@
 import { API_KEY, API_URL } from '../env.js';
 
-import { window } from '../platform';
 import { ApiError, ApiParseError } from './errors';
 import { getToken } from './token';
 
