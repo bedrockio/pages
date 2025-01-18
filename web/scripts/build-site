@@ -156,7 +156,7 @@ async function withoutSpinner(promise, message) {
   // to flush as the webpack compiler has previously
   // hanged and we want to know which step we're on.
   await new Promise((resolve) => {
-    setTimeout(resolve, 0);
+    setTimeout(resolve, 10);
   });
 
   const ret = await promise;
