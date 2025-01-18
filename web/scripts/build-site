@@ -11,6 +11,9 @@ const { program } = require('commander');
 
 const fetchData = require('../fetch-data');
 
+global.window = {};
+global.document = {};
+
 // Args
 
 program
@@ -22,6 +25,7 @@ program.parse();
 const opts = program.opts();
 
 (async () => {
+  assertRequiredNode();
   const data = await runTask(fetchData(), 'Fetching data...');
   const files = await runTask(compileSite(data), 'Building site...');
   await runTask(optimizeFonts(files), 'Optimizing fonts...');
@@ -30,6 +34,13 @@ const opts = program.opts();
   console.info('Finished! You can now serve these files with "yarn serve".');
   console.info('');
 })();
+
+function assertRequiredNode() {
+  const major = process.version.split('.')[0].slice(1);
+  if (major < 22) {
+    throw new Error('This script must be run using node v22 or higher.');
+  }
+}
 
 async function loadConfig(file) {
   let { default: module } = await import(file);
@@ -140,6 +151,14 @@ async function withSpinner(promise, message) {
 
 async function withoutSpinner(promise, message) {
   process.stdout.write(message);
+
+  // Set a small timeout to allow non-TTY write
+  // to flush as the webpack compiler has previously
+  // hanged and we want to know which step we're on.
+  await new Promise((resolve) => {
+    setTimeout(resolve, 0);
+  });
+
   const ret = await promise;
   process.stdout.write('done!\n');
   return ret;

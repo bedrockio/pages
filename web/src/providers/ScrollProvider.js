@@ -1,16 +1,12 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { onChange } from 'utils/hooks';
-import { window } from 'utils/platform';
 
 export default function (props) {
   const location = useLocation();
 
   onChange(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    document.body.scrollTo(0, 0);
   }, [location.pathname]);
 
   return props.children;

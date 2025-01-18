@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { DataProvider } from 'stores/data';

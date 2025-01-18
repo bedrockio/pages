@@ -1,11 +1,15 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const { minimizer } = require('./webpack.plugins.js');
 
 const config = require('./webpack.shared.js');
 
+const { ENV_NAME = 'development' } = process.env;
+
 module.exports = {
   ...config,
   target: 'node',
-  mode: 'production',
+  mode: ENV_NAME,
   entry: {
     generator: './src/generator.entry.js',
   },
@@ -15,8 +19,9 @@ module.exports = {
       {
         test: /\.(css|less)$/,
         use: [
-          require.resolve('style-loader'),
+          MiniCssExtractPlugin.loader,
           require.resolve('css-loader'),
+          require.resolve('postcss-loader'),
           require.resolve('less-loader'),
         ],
       },

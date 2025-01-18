@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'markdown-to-jsx';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { omit } from 'lodash';
 
 import { DataContext } from 'stores/data';

@@ -20,7 +20,7 @@ if (!target) {
 const { peerDependencies } = require('../package.json');
 
 for (let key of Object.keys(peerDependencies)) {
-  const sDir = path.join('../node_modules', key);
+  const sDir = path.join('./node_modules', key);
   const tDir = path.join(target, 'node_modules', key);
   fs.rmSync(sDir, {
     force: true,

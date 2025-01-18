@@ -5,7 +5,6 @@ import { request } from 'utils/api';
 
 import { replaceElement, removeElement } from 'utils/array';
 import { localStorage } from 'utils/storage';
-import { window } from 'utils/platform';
 
 export const DataContext = React.createContext();
 

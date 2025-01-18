@@ -17,11 +17,11 @@ module.exports = {
     assetModuleFilename: 'assets/[contenthash][ext]',
   },
   resolve: {
-    extensions: ['.js', '.mjs', '.json', '.jsx'],
+    extensions: ['.mjs', '.js', '.json', '.jsx'],
     modules: ['src', 'node_modules'],
     // Webpack's chooses "browser" first by default which can increase
     // bundle sizes as this is often pre-bundled code.
-    mainFields: ['module', 'browser', 'main'],
+    mainFields: ['module', 'main', 'browser'],
     alias: {
       lodash: 'lodash-es',
     },

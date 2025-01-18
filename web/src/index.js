@@ -19,3 +19,18 @@ export { default as ErrorBoundary } from 'components/ErrorBoundary';
 
 export * from 'components/fields';
 export { default as PageProvider } from 'providers/PageProvider';
+
+// This package must export react-router components/hooks for use.
+// Attempting to use as a peer dependency will fail due to quirks
+// in module resolution with webpack.
+export {
+  Link,
+  Route,
+  Routes,
+  Outlet,
+  NavLink,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router';

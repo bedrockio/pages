@@ -5,6 +5,7 @@ Bedrock utilities for static site generation.
 - [Install](#install)
 - [Deployment](#deployment)
 - [Monorepo](#monorepo)
+- [Web](#web)
 
 ## Install
 
@@ -38,3 +39,9 @@ yarn workspace @bedrockio/pages add <package>
 # Required to consolidate dependencies to root
 yarn install
 ```
+
+## Web
+
+> [!WARNING] > `react-router` **must** be imported directly from this package as it is used internally and cannot be a peer dependency due to module resolution issues.
+
+> [!WARNING] > When linking for local dev an "Invalid hook call" error typically means you need to run `yarn eject`.
