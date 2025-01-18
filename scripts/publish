@@ -1,37 +1,63 @@
 #!/usr/bin/env node
 
-const fs = require('fs/promises');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs/promises");
+const path = require("path");
+const readline = require("readline");
 
-const rootPackage = require('../package.json');
+const { execSync } = require("child_process");
+
+const webPackage = require("../web/package.json");
 
 (async () => {
-  const { version } = rootPackage;
-  console.info(`Version: ${version}`);
-  console.info();
+  console.info(`Current Version: ${webPackage.version}`);
+  const version = await prompt("New version: ");
 
-  await publishRepo('utils', '@bedrockio/pages-utils', version);
-  await publishRepo('api', '@bedrockio/pages-api', version);
-  await publishRepo('web', '@bedrockio/pages', version);
+  const confirm = await prompt(`Confirm (y/n): `);
+
+  if (confirm !== "y") {
+    console.info("Aborting...");
+    process.exit(0);
+  }
+
+  await publishRepo("utils", "@bedrockio/pages-utils", version);
+  await publishRepo("api", "@bedrockio/pages-api", version);
+  await publishRepo("web", "@bedrockio/pages", version);
+
+  execSync(`git commit -m v${version}`);
+  execSync(`git tag  v${version}`);
 })();
 
 async function publishRepo(name, pkgName, version) {
   const file = path.resolve(`./${name}/package.json`);
   const pkg = require(file);
   const newPkg = { ...pkg, version };
-  if (newPkg.dependencies['@bedrockio/pages-utils']) {
-    newPkg.dependencies['@bedrockio/pages-utils'] = `^${version}`;
+  if (newPkg.dependencies["@bedrockio/pages-utils"]) {
+    newPkg.dependencies["@bedrockio/pages-utils"] = `^${version}`;
   }
 
   process.stdout.write(`Publishing: ${name}...`);
 
   await fs.writeFile(file, JSON.stringify(newPkg, null, 2));
+  execSync(`git add ${file}`);
 
   try {
     execSync(`yarn workspace ${pkgName} publish`);
-    process.stdout.write('done!\n');
+    process.stdout.write("done!\n");
   } catch {
     // Do nothing
   }
+}
+
+async function prompt(question) {
+  return new Promise((resolve, reject) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    rl.question(question, (answer) => {
+      resolve(answer);
+      rl.close();
+    });
+  });
 }

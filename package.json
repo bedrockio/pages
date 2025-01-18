@@ -1,6 +1,5 @@
 {
   "private": true,
-  "version": "0.1.50",
   "license": "MIT",
   "scripts": {
     "publish": "scripts/publish"
@@ -11,7 +10,7 @@
     "./utils"
   ],
   "volta": {
-    "node": "20.12.2",
-    "yarn": "1.22.19"
+    "node": "22.13.0",
+    "yarn": "1.22.22"
   }
 }
