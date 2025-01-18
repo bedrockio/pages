@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --no-warnings
 
 // Script to eject peer dependencies to a specific node_modules
 // directory. This allows yarn link to use the same instance

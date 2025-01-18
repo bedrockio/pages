@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --no-warnings
 /* eslint no-console: 0 */
 
 const fs = require('fs/promises');
