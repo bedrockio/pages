@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('@bedrockio/node-warnings');
+
 // Args
 
 const { program } = require('commander');
