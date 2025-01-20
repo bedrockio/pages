@@ -19,7 +19,12 @@ global.document = {};
 program
   .name('build-site')
   .description('Compiles React app into static site.')
-  .option('--analyze', 'Analyzes the build.');
+  .option('-a --analyze', 'Analyzes the build.')
+  .option(
+    '-t --timeout <number>',
+    'A timeout in seconds to prevent compiler from hanging',
+    60,
+  );
 
 program.parse();
 const opts = program.opts();
@@ -66,7 +71,7 @@ async function compileSite(data) {
     recursive: true,
   });
 
-  await runCompiler(compiler);
+  await runCompilerWithTimeout(compiler, opts.timeout);
 
   const generator = require(path.resolve('dist/generator'));
   const template = await fs.readFile('dist/generator/template.html', 'utf-8');
@@ -119,6 +124,24 @@ function runCompiler(compiler) {
   });
 }
 
+function runCompilerWithTimeout(compiler, seconds) {
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error('Operation timed out.'));
+    }, seconds * 1000);
+
+    runCompiler(compiler)
+      .then((result) => {
+        clearTimeout(timeoutId);
+        resolve(result);
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId);
+        reject(error);
+      });
+  });
+}
+
 async function runTask(promise, message) {
   if (process.stdout.isTTY) {
     return await withSpinner(promise, message);
@@ -129,37 +152,46 @@ async function runTask(promise, message) {
 
 async function withSpinner(promise, message) {
   const { oraPromise } = await import('ora');
-
-  return await oraPromise(promise, {
-    prefixText: message,
-    color: 'yellow',
-    spinner: {
-      interval: 80,
-      frames: [
-        '▰▱▱▱▱▱▱',
-        '▰▰▱▱▱▱▱',
-        '▰▰▰▱▱▱▱',
-        '▰▰▰▰▱▱▱',
-        '▰▰▰▰▰▱▱',
-        '▰▰▰▰▰▰▱',
-        '▰▰▰▰▰▰▰',
-        '▰▱▱▱▱▱▱',
-      ],
-    },
-  });
+  try {
+    return await oraPromise(promise, {
+      prefixText: message,
+      color: 'yellow',
+      spinner: {
+        interval: 80,
+        frames: [
+          '▰▱▱▱▱▱▱',
+          '▰▰▱▱▱▱▱',
+          '▰▰▰▱▱▱▱',
+          '▰▰▰▰▱▱▱',
+          '▰▰▰▰▰▱▱',
+          '▰▰▰▰▰▰▱',
+          '▰▰▰▰▰▰▰',
+          '▰▱▱▱▱▱▱',
+        ],
+      },
+    });
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
 }
 
 async function withoutSpinner(promise, message) {
-  process.stdout.write(message);
+  try {
+    process.stdout.write(message);
 
-  // Set a small timeout to allow non-TTY write
-  // to flush as the webpack compiler has previously
-  // hanged and we want to know which step we're on.
-  await new Promise((resolve) => {
-    setTimeout(resolve, 10);
-  });
+    // Set a small timeout to allow non-TTY write
+    // to flush as the webpack compiler has previously
+    // hanged and we want to know which step we're on.
+    await new Promise((resolve) => {
+      setTimeout(resolve, 10);
+    });
 
-  const ret = await promise;
-  process.stdout.write('done!\n');
-  return ret;
+    const ret = await promise;
+    process.stdout.write('done!\n');
+    return ret;
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
 }
