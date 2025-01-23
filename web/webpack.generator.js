@@ -4,12 +4,19 @@ const { minimizer } = require('./webpack.plugins.js');
 
 const config = require('./webpack.shared.js');
 
-const { ENV_NAME = 'development' } = process.env;
+function getMode() {
+  const { ENV_NAME = 'development' } = process.env;
+  if (ENV_NAME === 'development') {
+    return ENV_NAME;
+  } else {
+    return 'production';
+  }
+}
 
 module.exports = {
   ...config,
   target: 'node',
-  mode: ENV_NAME,
+  mode: getMode(),
   entry: {
     generator: './src/generator.entry.js',
   },
