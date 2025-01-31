@@ -921,10 +921,10 @@
   resolved "https://registry.yarnpkg.com/@bedrockio/config/-/config-2.2.3.tgz#bac37d12e36a99ec16668c8b5d1e05dec9658fa9"
   integrity sha512-jfOcZIs63S0GaWQjh5vVIISr4b2vA0CWgm630N0FDB6wlW+O0Fsjox92Agx5nggVpSnNYWqzjuKaUb5RY3/ECw==
 
-"@bedrockio/eslint-plugin@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@bedrockio/eslint-plugin/-/eslint-plugin-1.1.3.tgz#d60637605fe3c2004bc7a95abb8cee561b2f6b9a"
-  integrity sha512-NO2OXoJILcXwcGOjqiu/EK6/SidVc0nG0vpoef91mS7jscPp47c5/n0WO9FVf3/9LkNd6FhnskUjgAagTknWiA==
+"@bedrockio/eslint-plugin@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@bedrockio/eslint-plugin/-/eslint-plugin-1.1.4.tgz#f1b4beabaa6c489a45a96992261355cabfbbbfeb"
+  integrity sha512-GQ3A9nBArErZarsPsWtLvjNbxA3XM4Gt6TuB1ylCVUcnRAT+EBJ5Y5zAXzai5Bn2l1wYMh1mw+Cw5o5tAfgLWQ==
   dependencies:
     "@eslint/js" "^9.19.0"
     eslint-plugin-import "^2.31.0"
@@ -938,10 +938,10 @@
   resolved "https://registry.yarnpkg.com/@bedrockio/node-warnings/-/node-warnings-0.0.1.tgz#ce40ad757039a1858314c5fb220402436f7e9074"
   integrity sha512-jwAC8ske6FWguw1Zlp5VPOYPOioPuOByNhlajyOSCt30wRUgenwUf30dLaslY9CLVY/UdOF4WXQokFN0i6pT/g==
 
-"@bedrockio/pages-utils@^0.1.64":
-  version "0.1.64"
-  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.1.64.tgz#0c8e272afd558b8c30c5b67d79289b577ec297c1"
-  integrity sha512-guDUbN4KlqRSuFk72oAqAKOP2dqtB2t4d2omon3WIZBuyQSmKwfqdHj0gYKRxhlC/Mp1uUkyAHW4D0HyqjAt+Q==
+"@bedrockio/pages-utils@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.2.0.tgz#f61f0f28ecd67f6f18cff309af4e52ba7ab35a2e"
+  integrity sha512-xfHdfbF373/5QxR8O5e+Js8ukn+hCACRn3bnwiRezQTZtmHAKUKKExOvOl3TJ5ieGNaAUHUsHIw4jlybIzMTgQ==
   dependencies:
     lodash "^4.17.21"
     sharp "^0.32.6"
