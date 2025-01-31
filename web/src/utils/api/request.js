@@ -80,7 +80,7 @@ export default async function request(options) {
         message = response.error.message;
         status = response.error.status;
       }
-    } catch (err) {
+    } catch {
       message = await res.clone().text();
     }
     throw new ApiError(message, type, status, response);
@@ -88,7 +88,7 @@ export default async function request(options) {
 
   try {
     return await res.json();
-  } catch (err) {
+  } catch {
     throw new ApiParseError();
   }
 }

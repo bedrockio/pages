@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { DataContext } from 'stores/data';
+import { DataContext } from '@stores/data';
 
-import Modal from 'components/Modal';
-import Button from 'components/Button';
-import Icon from 'components/Icon';
-import Tab from 'components/Tab';
+import Tab from '@components/Tab';
 
-import bem from 'utils/bem';
+import Icon from '@components/Icon';
+import Modal from '@components/Modal';
+import Button from '@components/Button';
+
+import bem from '@utils/bem';
 
 import Trigger from '../Trigger';
 import Publish from '../Publish';

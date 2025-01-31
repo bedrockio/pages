@@ -1,3 +1,6 @@
+// Note this config may be pointed to outside of this
+// directory so need to account for that here.
+
 const path = require('path');
 
 const config = require('@bedrockio/config');
@@ -17,14 +20,14 @@ module.exports = {
     assetModuleFilename: 'assets/[contenthash][ext]',
   },
   resolve: {
-    extensions: ['.mjs', '.js', '.json', '.jsx'],
-    modules: ['src', 'node_modules'],
-    // Webpack's chooses "browser" first by default which can increase
-    // bundle sizes as this is often pre-bundled code.
-    mainFields: ['module', 'main', 'browser'],
     alias: {
       lodash: 'lodash-es',
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@stores': path.resolve(__dirname, 'src/stores/'),
+      '@components': path.resolve(__dirname, 'src/components/'),
     },
+    modules: ['src', 'node_modules'],
+    mainFields: ['exports', 'module', 'main', 'browser'],
   },
   module: {
     rules: [
@@ -34,7 +37,7 @@ module.exports = {
         loader: require.resolve('babel-loader'),
         exclude: /node_modules/,
         options: {
-          configFile: require.resolve('./.babelrc.json'),
+          configFile: path.resolve(__dirname, 'babel.config.js'),
         },
       },
       {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 
-import bem from 'utils/bem';
+import bem from '@utils/bem';
 
 import './toggle.less';
 

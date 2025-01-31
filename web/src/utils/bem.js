@@ -4,9 +4,9 @@
 import React from 'react';
 import { kebabCase } from 'lodash';
 
-import { wrapComponent, getWrappedComponent } from 'utils/hoc';
+import { wrapComponent, getWrappedComponent } from './hoc';
 
-export default function (Component, prefix = '') {
+export default function bem(Component, prefix = '') {
   // Unwrap wrapped components
   const Wrapped = getWrappedComponent(Component);
 

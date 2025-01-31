@@ -1,4 +1,4 @@
-import Button from 'components/Button';
+import Button from '@components/Button';
 
 export default function Trigger(props) {
   const { name, icon, onClick, onEnter } = props;

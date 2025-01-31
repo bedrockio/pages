@@ -1,4 +1,4 @@
-import { hasToken } from 'utils/api';
+import { hasToken } from './api';
 
 export function canEdit() {
   return hasToken();

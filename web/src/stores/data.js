@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { kebabCase, startCase } from 'lodash';
 
-import { request } from 'utils/api';
-
-import { replaceElement, removeElement } from 'utils/array';
-import { localStorage } from 'utils/storage';
+import { request } from '@utils/api';
+import { localStorage } from '@utils/storage';
+import { replaceElement, removeElement } from '@utils/array';
 
 export const DataContext = React.createContext();
 

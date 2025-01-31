@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 
 import './modal.less';
 
-import Actions from 'components/Actions';
+import Actions from '@components/Actions';
 
 import Header from './Header';
 import Content from './Content';

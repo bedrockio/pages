@@ -1,9 +1,9 @@
 import React from 'react';
 import { pick } from 'lodash';
 
-import { DataContext } from 'stores/data';
+import { DataContext } from '@stores/data';
 
-import Form from 'components/Form';
+import Form from '@components/Form';
 
 const UPLOAD_FIELDS = ['id', 'mimeType', 'filename'];
 

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { DataContext } from 'stores/data';
+import { DataContext } from '@stores/data';
 
-import Modal from 'components/Modal';
-import Form from 'components/Form';
-import Button from 'components/Button';
-import Message from 'components/Message';
+import Form from '@components/Form';
+import Modal from '@components/Modal';
+import Button from '@components/Button';
+import Message from '@components/Message';
 
-import bem from 'utils/bem';
+import bem from '@utils/bem';
 
 import EditField from '../EditField';
 

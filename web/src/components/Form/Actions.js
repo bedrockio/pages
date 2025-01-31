@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Actions from 'components/Actions';
+import Actions from '@components/Actions';
 
 export default class Field extends React.Component {
   getDisabled() {

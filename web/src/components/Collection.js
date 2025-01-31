@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { omit, mapValues } from 'lodash';
 
-import { useData } from 'stores/data';
+import { useData } from '@stores/data';
 
-import { canEdit } from 'utils/editor';
+import { canEdit } from '@utils/editor';
 
 import Field from './Field';
 

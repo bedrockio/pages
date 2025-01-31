@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { useData } from 'stores/data';
+import { useData } from '@stores/data';
 
-import Form from 'components/Form';
-import Button from 'components/Button';
-import Message from 'components/Message';
+import Form from '@components/Form';
+import Button from '@components/Button';
+import Message from '@components/Message';
 
-import { ENV_NAME } from 'utils/env';
+import { ENV_NAME } from '@utils/env';
 
 export default function Publish() {
   const { publish, canPublish } = useData();

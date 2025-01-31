@@ -13,7 +13,7 @@ async function fetchData() {
     let json;
     try {
       json = await ret.json();
-    } catch (error) {
+    } catch {
       throw new Error('Invalid JSON response from API. Is your URL correct?');
     }
     if (json.error) {

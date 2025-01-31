@@ -1,4 +1,4 @@
-import { useClass } from 'utils/bem';
+import { useClass } from '@utils/bem';
 
 export default function Header(props) {
   const { getElementClass } = useClass('modal', props);

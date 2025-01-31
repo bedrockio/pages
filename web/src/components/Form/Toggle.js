@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Toggle from 'components/Toggle';
+import Toggle from '@components/Toggle';
 
 import Field from './Field';
 

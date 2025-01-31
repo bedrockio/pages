@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { DataContext } from 'stores/data';
+import { DataContext } from '@stores/data';
 
-import Modal from 'components/Modal';
-import Form from 'components/Form';
-import Icon from 'components/Icon';
-import Button from 'components/Button';
+import Form from '@components/Form';
+import Icon from '@components/Icon';
+import Modal from '@components/Modal';
+import Button from '@components/Button';
 
-import bem from 'utils/bem';
-import { replaceElement, removeElement } from 'utils/array';
+import bem from '@utils/bem';
+import { replaceElement, removeElement } from '@utils/array';
 
 import EditField from '../EditField';
 import OrderCollectionModal from '../OrderCollectionModal';

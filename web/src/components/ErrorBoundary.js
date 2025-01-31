@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router';
 
-import { onChange } from 'utils/hooks';
+import { onChange } from '@utils/hooks';
 
 export default class ErrorBoundary extends React.Component {
   static getDerivedStateFromError(error) {

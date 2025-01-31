@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router';
 
-import { LANDING_URL } from 'utils/env';
+import { LANDING_URL } from '@utils/env';
 
 export default function Meta(props) {
   const { pathname } = useLocation();

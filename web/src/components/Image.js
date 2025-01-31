@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 
-import { urlForUpload } from 'utils/uploads';
+import { urlForUpload } from '@utils/uploads';
 
 export default class Image extends React.Component {
   getUrl(image) {

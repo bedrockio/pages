@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Select from 'components/Select';
+import Select from '@components/Select';
 
 import Field from './Field';
 

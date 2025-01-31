@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from 'components/Button';
+import Button from '@components/Button';
 
 export default class FormButton extends React.Component {
   onClick = (evt) => {

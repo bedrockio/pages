@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { DataContext } from 'stores/data';
+import { DataContext } from '@stores/data';
 
-import Form from 'components/Form';
-import Icon from 'components/Icon';
-import Message from 'components/Message';
+import Form from '@components/Form';
+import Icon from '@components/Icon';
+import Message from '@components/Message';
 
 const PAGE_TYPES = [
   {

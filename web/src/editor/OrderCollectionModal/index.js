@@ -5,16 +5,16 @@ import {
   sortableHandle,
 } from 'react-sortable-hoc';
 
-import { DataContext } from 'stores/data';
+import { DataContext } from '@stores/data';
 
-import Icon from 'components/Icon';
-import Image from 'components/Image';
-import Modal from 'components/Modal';
-import Button from 'components/Button';
+import Icon from '@components/Icon';
+import Image from '@components/Image';
+import Modal from '@components/Modal';
+import Button from '@components/Button';
 
-import { moveElement } from 'utils/array';
+import { moveElement } from '@utils/array';
 
-import bem from 'utils/bem';
+import bem from '@utils/bem';
 
 const DragHandle = sortableHandle(({ className }) => {
   return <Icon className={className} name="bars editor" />;

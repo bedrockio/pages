@@ -1,8 +1,7 @@
 import React from 'react';
 
-import bem from 'utils/bem';
-
-import { ApiError } from 'utils/api';
+import bem from '@utils/bem';
+import { ApiError } from '@utils/api';
 
 import './field.less';
 

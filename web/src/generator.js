@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { DataProvider } from 'stores/data';
+import { DataProvider } from '@stores/data';
 
 export default async function generator(options) {
   const { App, Router, template, data } = options;

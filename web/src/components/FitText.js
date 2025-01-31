@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { onMount } from 'utils/hooks';
+import { onMount } from '@utils/hooks';
 
 const FONT_MIN = 10;
 

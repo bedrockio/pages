@@ -1,4 +1,4 @@
-import { useData } from 'stores/data';
+import { useData } from '@stores/data';
 
 import './server-error.less';
 

@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 
-import bem from 'utils/bem';
+import bem from '@utils/bem';
 
 import Pane from './Pane';
 

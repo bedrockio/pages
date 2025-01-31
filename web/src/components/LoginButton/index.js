@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import Icon from 'components/Icon';
+import Icon from '@components/Icon';
 
-import bem from 'utils/bem';
-import { canEdit } from 'utils/editor';
+import bem from '@utils/bem';
+import { canEdit } from '@utils/editor';
 
 import './login-button.less';
 

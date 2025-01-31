@@ -1,4 +1,4 @@
-import { API_URL } from 'utils/env';
+import { API_URL } from './env';
 
 export function urlForUpload(upload) {
   const id = upload.id || upload;

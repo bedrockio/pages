@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TextArea from 'components/TextArea';
+import TextArea from '@components/TextArea';
 
 import Field from './Field';
 

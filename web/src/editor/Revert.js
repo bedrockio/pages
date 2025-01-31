@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Form from 'components/Form';
-import Button from 'components/Button';
-import Message from 'components/Message';
+import Form from '@components/Form';
+import Button from '@components/Button';
+import Message from '@components/Message';
 
-import { request } from 'utils/api';
-import { formatDate } from 'utils/date';
+import { request } from '@utils/api';
+import { formatDate } from '@utils/date';
 
 export default class Revert extends React.Component {
   constructor(props) {

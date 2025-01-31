@@ -4,13 +4,13 @@ import Markdown from 'markdown-to-jsx';
 import { Link } from 'react-router';
 import { omit } from 'lodash';
 
-import { DataContext } from 'stores/data';
+import { DataContext } from '@stores/data';
 
-import ExternalLink from 'components/ExternalLink';
-import Image from 'components/Image';
+import { canEdit } from '@utils/editor';
+import { urlForUpload } from '@utils/uploads';
 
-import { urlForUpload } from 'utils/uploads';
-import { canEdit } from 'utils/editor';
+import Image from './Image';
+import ExternalLink from './ExternalLink';
 
 function convertLinks(props) {
   const { href, children } = props;

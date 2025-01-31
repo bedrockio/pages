@@ -9,7 +9,6 @@ const envMiddleware = require('./middleware/env');
 const dataMiddleware = require('./middleware/data');
 const historyMiddleware = require('./middleware/history');
 
-const API_URL = config.get('API_URL');
 const SERVER_PORT = config.get('SERVER_PORT');
 const SERVER_HOST = config.get('SERVER_HOST');
 

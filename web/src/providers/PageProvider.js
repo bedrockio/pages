@@ -1,9 +1,9 @@
 import { BrowserRouter } from 'react-router';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { DataProvider } from 'stores/data';
+import { DataProvider } from '@stores/data';
 
-import ServerError from 'components/ServerError';
+import ServerError from '@components/ServerError';
 
 import ScrollProvider from './ScrollProvider';
 

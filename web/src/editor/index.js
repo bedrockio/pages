@@ -1,11 +1,10 @@
 import React from 'react';
 
+import { DataContext } from '@stores/data';
 
-import { DataContext } from 'stores/data';
+import Icon from '@components/Icon';
 
-import Icon from 'components/Icon';
-
-import { canEdit } from 'utils/editor';
+import { canEdit } from '@utils/editor';
 
 import SettingsPanel from './SettingsPanel';
 import EditFieldModal from './EditFieldModal';
@@ -17,7 +16,7 @@ import './editor.less';
 
 Icon.useSet(icons, 'editor');
 
-export default class Editor extends React.Component {
+export class Editor extends React.Component {
   static contextType = DataContext;
 
   constructor(props) {

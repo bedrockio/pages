@@ -1,4 +1,4 @@
-import { localStorage, sessionStorage } from 'utils/storage';
+import { localStorage, sessionStorage } from '../storage';
 
 export const JWT_KEY = 'jwt';
 

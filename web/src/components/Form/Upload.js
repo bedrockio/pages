@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 
-import ExternalLink from 'components/ExternalLink';
+import ExternalLink from '@components/ExternalLink';
 
-import { request } from 'utils/api';
-import { urlForUpload } from 'utils/uploads';
+import { request } from '@utils/api';
+import { urlForUpload } from '@utils/uploads';
 
 import Field from './Field';
 

@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 
-import Message from 'components/Message';
-import Spinner from 'components/Spinner';
+import Message from '@components/Message';
+import Spinner from '@components/Spinner';
 
-import bem from 'utils/bem';
+import bem from '@utils/bem';
 
 import Text from './Text';
 import Field from './Field';

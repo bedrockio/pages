@@ -1,4 +1,4 @@
-import { useClass } from 'utils/bem';
+import { useClass } from '@utils/bem';
 
 import './spacer.less';
 
