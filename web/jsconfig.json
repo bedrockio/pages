@@ -1,9 +1,8 @@
 {
   "include": [
-    "./src/**/*"
+    "./src"
   ],
   "compilerOptions": {
-    "module": "CommonJS",
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,

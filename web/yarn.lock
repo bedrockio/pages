@@ -898,10 +898,10 @@
   resolved "https://registry.yarnpkg.com/@bedrockio/node-warnings/-/node-warnings-0.0.1.tgz#ce40ad757039a1858314c5fb220402436f7e9074"
   integrity sha512-jwAC8ske6FWguw1Zlp5VPOYPOioPuOByNhlajyOSCt30wRUgenwUf30dLaslY9CLVY/UdOF4WXQokFN0i6pT/g==
 
-"@bedrockio/pages-utils@^0.1.55":
-  version "0.1.55"
-  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.1.55.tgz#35cb27ec531e2643f0daee515a26e430944ffd27"
-  integrity sha512-dEMPQX5ocEUCUVgv21Mjh+R3dVqY8Fzn4dl9MFHDMnacTLWsfsXWSDcdDa7oXg5lnYtaf03vvxoZYrpvXb5mSw==
+"@bedrockio/pages-utils@^0.1.58":
+  version "0.1.58"
+  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.1.58.tgz#afd34a8408611c4c26b5b20193d70ef9e710110f"
+  integrity sha512-f592/BppB0jVbcxeIWDAZF0SBzfGQkljJwCmrIT6Iz9/YTKV8JgnHURMY/yNii6G9UsVFUQ6dKT6jnIXdl6m8A==
   dependencies:
     lodash "^4.17.21"
     sharp "^0.32.6"
@@ -1306,6 +1306,11 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
+
+"@types/lodash@^4.17.15":
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.15.tgz#12d4af0ed17cc7600ce1f9980cec48fc17ad1e89"
+  integrity sha512-w/P33JFeySuhN6JLkysYUK2gEmy9kHHFN7E8ro0tkfmlDOgxBDzWEZ/J8cWA+fHqFevpswDTFZnDx+R9lbL6xw==
 
 "@types/node@*":
   version "22.10.7"
