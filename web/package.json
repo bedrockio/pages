@@ -28,6 +28,18 @@
     "./editor": {
       "import": "./src/editor/index.js",
       "require": "./dist/cjs/editor/index.js"
+    },
+    "./generator": {
+      "import": "./src/generator.js",
+      "require": "./dist/cjs/generator.js"
+    },
+    "./babel-config": {
+      "import": "./src/.babelrc.json",
+      "require": "./dist/cjs/.babelrc.json"
+    },
+    "./webpack-config": {
+      "import": "./src/webpack.shared.js",
+      "require": "./dist/cjs/webpack.shared.js"
     }
   },
   "bin": {
