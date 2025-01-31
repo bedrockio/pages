@@ -34,12 +34,12 @@
       "require": "./dist/cjs/generator.js"
     },
     "./babel-config": {
-      "import": "./src/.babelrc.json",
-      "require": "./dist/cjs/.babelrc.json"
+      "import": "./.babelrc.json",
+      "require": "./.babelrc.json"
     },
     "./webpack-config": {
-      "import": "./src/webpack.shared.js",
-      "require": "./dist/cjs/webpack.shared.js"
+      "import": "./webpack.shared.js",
+      "require": "./webpack.shared.js"
     }
   },
   "bin": {
