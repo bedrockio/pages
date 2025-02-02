@@ -220,10 +220,10 @@
     kleur "^4.1.5"
     stdout-stream "^2.0.0"
 
-"@bedrockio/pages-utils@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.2.0.tgz#f61f0f28ecd67f6f18cff309af4e52ba7ab35a2e"
-  integrity sha512-xfHdfbF373/5QxR8O5e+Js8ukn+hCACRn3bnwiRezQTZtmHAKUKKExOvOl3TJ5ieGNaAUHUsHIw4jlybIzMTgQ==
+"@bedrockio/pages-utils@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.2.1.tgz#80c983a5539c01c83744bf46d5b802da0054108d"
+  integrity sha512-onWSbrhRzbLEHEOGalySn1ISrzylaxNQHivQ6710LcoBw4U1eqj2vcDRdkphwxDqRFNoCRM75I4yI9gpOIs7Wg==
   dependencies:
     lodash "^4.17.21"
     sharp "^0.32.6"
@@ -5262,6 +5262,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
+
+typescript@^5.7.3:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.7.3.tgz#919b44a7dbb8583a9b856d162be24a54bf80073e"
+  integrity sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==
 
 unbox-primitive@^1.1.0:
   version "1.1.0"
