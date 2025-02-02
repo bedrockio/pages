@@ -11,9 +11,17 @@ import { loadData } from '../utils/data.js';
 async function generate() {
   const data = await loadData();
 
-  // Build once to bundle the client app
+  // This builds the client app that will
+  // bootstraps the production build.
   await build();
 
+  // Ensure this is set here before starting
+  // SSR build to ensure libraries that check
+  // it aren't doing anything weird.
+  process.env.NODE_ENV = 'development';
+
+  // Expose browser globals as we are about
+  // to run our SSR build as a node import.
   const { window } = new JSDOM('', {
     url: 'https://bedrock.foundation',
   });
@@ -23,28 +31,35 @@ async function generate() {
   global.localStorage = window.localStorage;
   global.env = config.getAll();
 
-  // Ensure this is set here before starting
-  // SSR build to ensure libraries that check
-  // it aren't doing anything weird.
-  process.env.NODE_ENV = 'development';
-
   // Now build the generator. This works
   // like SSR but we will directly use it
   // as an import to render all pages out.
   await build({
+    ssr: {
+      // Note this is required as the source
+      // code here includes assets like SVG
+      // and LESS that must be transpiled
+      // into the SSR build output.
+      noExternal: ['@bedrockio/pages'],
+    },
     build: {
       ssr: './generator.entry.js',
       emptyOutDir: false,
     },
   });
 
+  // Load the main pages template.
   const template = await readFile('./dist/index.html', 'utf-8');
 
-  // const { render } = await runDevelopment();
+  // Load the generator entrypoint import with node.
   const file = path.resolve(process.cwd(), './dist/generator.entry.js');
   const { render } = await import(file);
 
+  // The entrypoint will find the Router component,
+  // extract its routes, and render each of them to
+  // a string which we can write to the file system.
   const routes = render(data);
+
   for (let route of routes) {
     const { path: url, source } = route;
 
