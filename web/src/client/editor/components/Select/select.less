@@ -1,0 +1,33 @@
+.editor-select {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25em 0.4em;
+  border: 1.5px solid #ddd;
+  border-radius: 4px;
+
+  &--disabled {
+    color: #aaa;
+
+    select {
+      display: none;
+    }
+
+    .select__placeholder {
+      visibility: hidden;
+    }
+  }
+
+  select {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    opacity: 0;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border: 1.5px solid #7fb1d3;
+  }
+}

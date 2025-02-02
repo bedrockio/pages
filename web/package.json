@@ -2,104 +2,51 @@
   "name": "@bedrockio/pages",
   "version": "0.2.0",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "lint": "eslint",
     "test": "jest",
     "types": "tsc",
-    "build": "scripts/build",
     "eject": "scripts/eject",
-    "prepublishOnly": "yarn build && yarn types"
+    "prepublishOnly": "yarn types"
   },
   "bin": {
     "start-site": "scripts/start-site",
-    "build-site": "scripts/build-site",
     "serve-site": "scripts/serve-site",
-    "build-images": "scripts/build-images"
+    "build-site": "scripts/build-site",
+    "build-images": "scripts/build-images",
+    "build-analyze": "scripts/build-analyze"
   },
-  "main": "./dist/cjs/index.js",
-  "module": "./src/index.js",
   "types": "./types/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./src/index.js",
-      "require": "./dist/cjs/index.js"
-    },
-    "./editor": {
-      "import": "./src/editor/index.js",
-      "require": "./dist/cjs/editor/index.js"
-    },
-    "./generator": {
-      "import": "./src/generator.js",
-      "require": "./dist/cjs/generator.js"
-    },
-    "./eslint.config.js": {
-      "require": "./eslint.config.js"
-    }
+    ".": "./src/client/index.js",
+    "./editor": "./src/client/editor/Editor.js",
+    "./vite": "./vite.config.js"
   },
   "dependencies": {
-    "@babel/cli": "^7.26.4",
-    "@babel/core": "^7.26.7",
-    "@babel/plugin-proposal-decorators": "^7.25.9",
-    "@babel/plugin-transform-runtime": "^7.25.9",
-    "@babel/preset-env": "^7.26.7",
-    "@babel/preset-react": "^7.26.3",
     "@bedrockio/config": "^2.2.3",
-    "@bedrockio/node-warnings": "^0.0.1",
+    "@bedrockio/logger": "^1.1.2",
     "@bedrockio/pages-utils": "^0.2.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
-    "babel-loader": "^9.2.1",
-    "babel-plugin-module-resolver": "^5.0.2",
-    "circular-dependency-plugin": "^5.2.2",
+    "@vitejs/plugin-react": "^4.3.4",
     "commander": "^12.0.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.8.1",
-    "express-to-koa": "^2.0.0",
-    "favicons": "^7.2.0",
-    "favicons-webpack-plugin": "^6.0.1",
-    "html-loader": "^5.0.0",
-    "html-webpack-plugin": "^5.6.0",
     "koa": "^2.14.2",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
-    "less": "^4.2.0",
-    "less-loader": "^11.1.3",
     "lodash-es": "^4.17.21",
     "markdown-to-jsx": "^7.3.2",
-    "mini-css-extract-plugin": "^2.7.6",
-    "ora": "^7.0.1",
-    "postcss": "^8.4.31",
-    "postcss-loader": "^7.3.3",
-    "prop-types": "^15.8.1",
-    "react-helmet-async": "^2.0.5",
-    "react-refresh": "^0.14.0",
-    "react-router-dom": "^7.1.4",
     "react-sortable-hoc": "^2.0.0",
-    "style-loader": "^3.3.3",
-    "subfont": "^7.2.0",
-    "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.97.1",
-    "webpack-bundle-analyzer": "^4.9.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-middleware": "^6.1.1",
-    "webpack-hot-middleware": "^2.25.4"
+    "vite": "^6.0.11"
   },
-  "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
+  "peerDependencies": {},
   "devDependencies": {
-    "@babel/eslint-parser": "^7.26.5",
-    "@bedrockio/eslint-plugin": "^1.1.4",
+    "@bedrockio/eslint-plugin": "^1.1.6",
     "@bedrockio/prettier-config": "^1.0.2",
     "@types/lodash": "^4.17.15",
     "eslint": "^9.19.0",
-    "eslint-import-resolver-babel-module": "^5.3.2",
-    "eslint-import-resolver-webpack": "^0.13.10",
     "prettier": "^3.4.2",
-    "react": "^18.3.1",
-    "react-dom": "18.3.1",
-    "typescript": "^5.2.2"
+    "rollup-plugin-visualizer": "^5.14.0"
   },
+  "prettier": "@bedrockio/prettier-config",
   "engines": {
     "node": ">=22"
   },

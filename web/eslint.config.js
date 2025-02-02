@@ -1,36 +1,18 @@
-const path = require('path');
+import { react, recommended, nodeImports } from '@bedrockio/eslint-plugin';
 
-const babelParser = require('@babel/eslint-parser');
-
-const {
+export default [
   react,
   recommended,
-  webpackImports,
-} = require('@bedrockio/eslint-plugin');
-
-module.exports = [
-  react,
-  recommended,
-  webpackImports,
+  nodeImports,
   {
-    files: ['**/*.js'],
-    languageOptions: {
-      parser: babelParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        babelOptions: {
-          configFile: path.resolve(__dirname, 'babel.config.js'),
-        },
-      },
-    },
     settings: {
       'import/resolver': {
-        webpack: {
-          config: path.resolve(__dirname, 'webpack.shared.js'),
-        },
-        node: {
-          moduleDirectory: ['node_modules'],
+        alias: {
+          map: [
+            ['@data', './src/client/data'],
+            ['@utils', './src/client/utils'],
+            ['@components', './src/client/components'],
+          ],
         },
       },
     },

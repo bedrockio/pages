@@ -1,0 +1,15 @@
+{
+  "include": [
+    "./src",
+    "vite.config.js"
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "outDir": "types"
+  },
+}

@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
-require('@bedrockio/node-warnings');
+import path from 'path';
+import fs from 'fs/promises';
 
-const fs = require('fs/promises');
-const path = require('path');
-
-const { program } = require('commander');
-const { createImageSet } = require('@bedrockio/pages-utils');
+import { program } from 'commander';
+import { createImageSet } from '@bedrockio/pages-utils';
 
 const SIZES = [300, 600, 1200];
 const EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.webp'];

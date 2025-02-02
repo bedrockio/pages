@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+export ANALYZE=${1:-treemap}
+vite build

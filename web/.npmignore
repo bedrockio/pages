@@ -1,5 +1,5 @@
 .vscode
-.eslintrc
+eslint.config.js
 .eslintignore
-tsconfig.json
+jsconfig.json
 test
