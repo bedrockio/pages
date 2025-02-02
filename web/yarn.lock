@@ -220,10 +220,10 @@
     kleur "^4.1.5"
     stdout-stream "^2.0.0"
 
-"@bedrockio/pages-utils@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.2.1.tgz#80c983a5539c01c83744bf46d5b802da0054108d"
-  integrity sha512-onWSbrhRzbLEHEOGalySn1ISrzylaxNQHivQ6710LcoBw4U1eqj2vcDRdkphwxDqRFNoCRM75I4yI9gpOIs7Wg==
+"@bedrockio/pages-utils@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.2.2.tgz#ec0dab7ef7bdd0147588eefc9f8fabeda2525438"
+  integrity sha512-cj3YW8U9VixSKAmsYlSrI6walRH3I7dXjWoWURXE23Ayj3OICUg29EZTjrFwnM0CRkbc3T5CA2UNo3SXvRmI5w==
   dependencies:
     lodash "^4.17.21"
     sharp "^0.32.6"
