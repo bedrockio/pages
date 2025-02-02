@@ -5,9 +5,9 @@ import { DataProvider } from '@data';
 import ServerError from '../components/ServerError';
 
 export default function PageProvider(props) {
-  const { data = __DATA__, children } = props;
+  const { path, data = __DATA__, children } = props;
   return (
-    <DataProvider data={data}>
+    <DataProvider path={path} data={data}>
       <ServerError />
       {children}
     </DataProvider>

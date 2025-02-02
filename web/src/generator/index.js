@@ -25,13 +25,13 @@ async function generate() {
 
   // Expose browser globals as we are about
   // to run our SSR build as a node import.
-  const { window } = new JSDOM('', {
+  const dom = new JSDOM('', {
     url: 'https://bedrock.foundation',
   });
 
-  global.window = window;
-  global.document = window.document;
-  global.localStorage = window.localStorage;
+  global.window = dom.window;
+  global.document = dom.window.document;
+  global.localStorage = dom.window.localStorage;
   global.env = config.getAll();
 
   // Now build the generator. This works
@@ -66,6 +66,7 @@ async function generate() {
   await Promise.all(
     routes.map(async (route) => {
       const { path: url, generate } = route;
+
       const { prelude: readable } = await generate;
       const response = new Response(readable);
       const source = await response.text();

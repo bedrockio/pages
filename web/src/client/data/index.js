@@ -15,6 +15,9 @@ export function DataProvider(props) {
   if (props.data instanceof Error) {
     throw props.data;
   }
+
+  const { path } = props;
+
   const [data, setData] = useState(getLocal() || props.data || getData());
   const [publishing, setPublishing] = useState(false);
 
@@ -197,8 +200,9 @@ export function DataProvider(props) {
   }
 
   return (
-    <DataContext.Provider
+    <DataContext
       value={{
+        path,
         getField,
         getFieldValue,
         pages,
@@ -223,7 +227,7 @@ export function DataProvider(props) {
         reset,
       }}>
       {props.children}
-    </DataContext.Provider>
+    </DataContext>
   );
 }
 

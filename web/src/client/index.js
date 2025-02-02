@@ -1,3 +1,4 @@
+export { default as Meta } from './components/Meta';
 export { default as Field } from './components/Field';
 export { default as Spacer } from './components/Spacer';
 export { default as Spinner } from './components/Spinner';
