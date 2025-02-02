@@ -1,5 +1,4 @@
 import path from 'path';
-
 import { readFile, writeFile } from 'fs/promises';
 
 import { build } from 'vite';
@@ -13,7 +12,11 @@ async function generate() {
 
   // This builds the client app that will
   // bootstraps the production build.
-  await build();
+  await build({
+    build: {
+      emptyOutDir: true,
+    },
+  });
 
   // Ensure this is set here before starting
   // SSR build to ensure libraries that check
@@ -60,14 +63,17 @@ async function generate() {
   // a string which we can write to the file system.
   const routes = render(data);
 
-  for (let route of routes) {
-    const { path: url, source } = route;
-
-    const filename = url === '/' ? '/index.html' : `${url}.html`;
-    const html = template.replace('<!-- BODY -->', source);
-
-    await writeFile(path.join('dist', filename), html);
-  }
+  await Promise.all(
+    routes.map(async (route) => {
+      const { path: url, generate } = route;
+      const { prelude: readable } = await generate;
+      const response = new Response(readable);
+      const source = await response.text();
+      const filename = url === '/' ? '/index.html' : `${url}.html`;
+      const html = template.replace('<!-- BODY -->', source);
+      await writeFile(path.join('dist', filename), html);
+    }),
+  );
 }
 
 generate();

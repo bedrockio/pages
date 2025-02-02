@@ -37,7 +37,7 @@ function entry() {
 function setup() {
   return {
     name: 'pages-build-config',
-    config(config, { command, mode }) {
+    config(config, { mode }) {
       return defineConfig({
         root: 'src',
         publicDir: 'public',
@@ -58,7 +58,6 @@ function setup() {
 
         build: {
           outDir: '../dist',
-          emptyOutDir: command !== 'build',
           assetsInlineLimit: (file) => {
             return !file.endsWith('.svg');
           },
