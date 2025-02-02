@@ -220,10 +220,10 @@
     kleur "^4.1.5"
     stdout-stream "^2.0.0"
 
-"@bedrockio/pages-utils@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.2.3.tgz#b413abee90fe1c7de177f58e70ec11ebd2bdd43b"
-  integrity sha512-1lW0hPOQLIpVwetQt/5tCKPA/eKovVKdeYPYId9/N5jD81bPTqlJRWQuqzQXD50C4pqgNBwoGol+EbjtyQKYZQ==
+"@bedrockio/pages-utils@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@bedrockio/pages-utils/-/pages-utils-0.2.4.tgz#cdc0f8c5a5f061ee6190294bf901a81c8c5ef139"
+  integrity sha512-9zaFs3WgrLuhK4k7qfaz/FDWoiGOspZvmsohWoEsF9mbRgpdRI0e6qSSPf5mYLXeO0tW72pGM1HwSnjHwd1KJQ==
   dependencies:
     lodash "^4.17.21"
     sharp "^0.32.6"
@@ -4419,6 +4419,11 @@ react-sortable-hoc@^2.0.0:
     "@babel/runtime" "^7.2.0"
     invariant "^2.2.4"
     prop-types "^15.5.7"
+
+react@^19.0.0:
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-19.0.0.tgz#6e1969251b9f108870aa4bff37a0ce9ddfaaabdd"
+  integrity sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==
 
 read-package-json-fast@^3.0.0:
   version "3.0.2"

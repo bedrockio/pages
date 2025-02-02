@@ -2,24 +2,35 @@ import React, { useState, useContext } from 'react';
 import { kebabCase, startCase } from 'lodash-es';
 
 import { replaceElement, removeElement } from '@utils/array';
+
 import { localStorage } from '@utils/storage';
 import { request } from '@utils/api';
 
+import ServerError from '../components/ServerError';
+
 export const DataContext = React.createContext();
+
+const { ENV_NAME } = global.env;
 
 export function useData() {
   return useContext(DataContext);
 }
 
 export function DataProvider(props) {
-  if (props.data instanceof Error) {
-    throw props.data;
-  }
-
   const { path } = props;
 
-  const [data, setData] = useState(getLocal() || props.data || getData());
+  const [data, setData] = useState(getLocal() || props.data);
   const [publishing, setPublishing] = useState(false);
+
+  const { error } = props.data;
+
+  if (error) {
+    if (ENV_NAME === 'production') {
+      throw error;
+    } else {
+      return <ServerError error={error} />;
+    }
+  }
 
   // Fields
 
@@ -249,10 +260,6 @@ function removeLocal() {
 
 function hasLocal() {
   return !!getLocal();
-}
-
-function getData() {
-  return window.__DATA__ || {};
 }
 
 // Field: "name"

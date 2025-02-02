@@ -35,10 +35,10 @@ export async function injectData(source) {
     data = await loadData();
     data = JSON.stringify(data);
   } catch (error) {
-    data = `new Error('${error.message}')`;
+    data = `{ error: new Error('${error.message}') }`;
   }
   return source.replace(
     '<!-- env:data -->',
-    `<script>__DATA__ = ${data}</script>`
+    `<script>__DATA__ = ${data}</script>`,
   );
 }
