@@ -42,6 +42,7 @@ function setup() {
         root: 'src',
         publicDir: 'public',
         define: define(mode),
+
         server: {
           host: SERVER_HOST,
           port: SERVER_PORT,
@@ -68,13 +69,6 @@ function setup() {
           loader: 'jsx',
           include: /.*\.jsx?$/,
           exclude: [],
-        },
-        optimizeDeps: {
-          esbuildOptions: {
-            loader: {
-              '.js': 'jsx',
-            },
-          },
         },
       });
     },
