@@ -70,6 +70,13 @@ function setup() {
           include: /.*\.jsx?$/,
           exclude: [],
         },
+        optimizeDeps: {
+          esbuildOptions: {
+            loader: {
+              '.js': 'jsx',
+            },
+          },
+        },
       });
     },
   };
