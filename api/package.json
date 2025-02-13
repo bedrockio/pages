@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@bedrockio/pages-utils": "^0.2.10",
-    "@kubernetes/client-node": "^1.0.0"
+    "@kubernetes/client-node": "0.20.0"
   },
   "peerDependencies": {
     "@bedrockio/model": "^0.2.1",
