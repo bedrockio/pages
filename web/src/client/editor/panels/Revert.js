@@ -1,77 +1,64 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+
+import { useData } from '@data';
 
 import { formatDate } from '@utils/date';
 import { request } from '@utils/api';
 
+import Form from '../components/Form';
 import Button from '../components/Button';
 import Message from '../components/Message';
 
-import Form from '../components/Form';
+export default function Revert() {
+  const { loadVersions } = useData();
 
-export default class Revert extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: '',
-      error: null,
-      loading: false,
-      selected: null,
-      versions: [],
-    };
-  }
+  const [message, setMessage] = useState('');
 
-  componentDidMount() {
-    this.loadVersions();
-  }
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [versions, setVersions] = useState([]);
 
-  loadVersions = async () => {
+  useEffect(() => {
+    load();
+  }, []);
+
+  async function load() {
     try {
-      this.setState({
-        error: null,
-        loading: true,
-      });
-      const { data: versions } = await request({
-        method: 'GET',
-        path: '/1/site/versions',
-      });
+      setError(null);
+      setLoading(true);
+
+      const versions = await loadVersions();
 
       const selected = versions.find((version) => {
         return version.current;
       });
 
-      this.setState({
-        versions,
-        selected,
-        loading: false,
-      });
+      setVersions(versions);
+      setSelected(selected);
+      setLoading(false);
     } catch (error) {
-      this.setState({
-        error,
-        loading: false,
-      });
+      setError(error);
+      setLoading(false);
     }
-  };
+  }
 
-  onVersionChange = ({ value }) => {
-    const { versions } = this.state;
-    this.setState({
-      selected: versions.find((version) => {
+  function onVersionChange({ value }) {
+    setSelected(
+      versions.find((version) => {
         return version.name === value;
       }),
-    });
-  };
+    );
+  }
 
-  onSubmit = async () => {
+  async function onSubmit() {
     try {
-      const { selected } = this.state;
       if (selected.current) {
         throw new Error('Version is already current.');
       }
-      this.setState({
-        message: '',
-        error: null,
-        loading: true,
-      });
+      setMessage('');
+      setError(null);
+      setLoading(true);
       await request({
         method: 'POST',
         path: '/1/site/revert',
@@ -79,22 +66,17 @@ export default class Revert extends React.Component {
           version: selected.name,
         },
       });
-      this.setState({
-        loading: false,
-        message: 'Successfully reverted version.',
-      });
+      setLoading(false);
+      setMessage('Successfully reverted version.');
     } catch (error) {
-      this.setState({
-        error,
-        loading: false,
-      });
+      setError(error);
+      setLoading(false);
     }
-  };
+  }
 
-  render() {
-    const { loading, error, message, selected, versions } = this.state;
+  function render() {
     return (
-      <Form error={error} loading={loading} onSubmit={this.onSubmit}>
+      <Form error={error} loading={loading} onSubmit={onSubmit}>
         {message && <Message success>{message}</Message>}
         <Form.Select
           label="Version"
@@ -107,17 +89,19 @@ export default class Revert extends React.Component {
               value: name,
             };
           })}
-          onChange={this.onVersionChange}
+          onChange={onVersionChange}
         />
-        <div>
+        <div style={{ marginTop: '-1.2rem' }}>
           <b>Published:</b> {selected ? formatDate(selected.publishedAt) : '-'}
         </div>
         <Form.Actions>
-          <Button small disabled={!selected} onClick={this.onSubmit}>
+          <Button small disabled={!selected} onClick={onSubmit}>
             Submit
           </Button>
         </Form.Actions>
       </Form>
     );
   }
+
+  return render();
 }

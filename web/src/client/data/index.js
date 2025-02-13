@@ -197,6 +197,16 @@ export function DataProvider(props) {
     removeLocal();
   }
 
+  // Versions
+
+  async function loadVersions() {
+    const { data } = await request({
+      method: 'GET',
+      path: '/1/site/versions',
+    });
+    return data;
+  }
+
   function mergeData(update) {
     const merged = {
       ...data,
@@ -235,6 +245,7 @@ export function DataProvider(props) {
         publish,
         publishing,
         canPublish,
+        loadVersions,
         reset,
       }}>
       {props.children}

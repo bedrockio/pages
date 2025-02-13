@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useData } from '@data';
 
@@ -9,12 +9,40 @@ import Message from '../components/Message';
 const { ENV_NAME } = global.env;
 
 export default function Publish() {
-  const { publish, canPublish } = useData();
+  const { publish, canPublish, loadVersions } = useData();
 
   const [version, setVersion] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  async function load() {
+    try {
+      setError(null);
+      setLoading(true);
+
+      const versions = await loadVersions();
+
+      const current = versions.find((version) => {
+        return version.current;
+      });
+
+      const next =
+        current?.name.replace(/\d/, (digit) => {
+          return parseInt(digit) + 1;
+        }) || 'v1';
+
+      setVersion(next);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  }
 
   async function onSubmit() {
     setError(null);
