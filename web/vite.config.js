@@ -3,7 +3,7 @@ import { dirname, resolve } from 'path';
 
 import config from '@bedrockio/config';
 import react from '@vitejs/plugin-react';
-import { visualizer } from 'rollup-plugin-visualizer';
+import visualizer from '@bedrockio/vite-visualizer';
 import { defineConfig } from 'vite';
 
 import { injectData } from './src/utils/data.js';

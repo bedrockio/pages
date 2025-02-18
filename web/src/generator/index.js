@@ -30,6 +30,7 @@ async function generate() {
   });
 
   global.window = dom.window;
+  global.history = dom.window.history;
   global.document = dom.window.document;
   global.localStorage = dom.window.localStorage;
   global.env = config.getAll();
