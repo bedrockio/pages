@@ -7,7 +7,9 @@ import config from '@bedrockio/config';
 
 import { loadData } from '../utils/data.js';
 
-async function generate() {
+const ENV = config.getAll();
+
+export async function generate(options) {
   const data = await loadData();
 
   // This builds the client app that will
@@ -16,6 +18,12 @@ async function generate() {
     build: {
       emptyOutDir: true,
     },
+
+    ...(options.env && {
+      define: {
+        'global.env': JSON.stringify(ENV),
+      },
+    }),
   });
 
   // Ensure this is set here before starting
@@ -33,7 +41,7 @@ async function generate() {
   global.history = dom.window.history;
   global.document = dom.window.document;
   global.localStorage = dom.window.localStorage;
-  global.env = config.getAll();
+  global.env = ENV;
 
   // Now build the generator. This works
   // like SSR but we will directly use it
@@ -77,5 +85,3 @@ async function generate() {
     }),
   );
 }
-
-generate();

@@ -3,11 +3,21 @@
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { program } from 'commander';
+
+program
+  .name('build-site')
+  .description('Compiles the site and builds as static pages.')
+  .option('--env', 'Build envs into output. Use this if not using serve-site.');
+
+program.parse();
+const options = program.opts();
 
 const GENERATOR = '../src/generator/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 (async () => {
-  await import(path.resolve(__dirname, GENERATOR));
+  const { generate } = await import(path.resolve(__dirname, GENERATOR));
+  await generate(options);
 })();
