@@ -11,11 +11,11 @@
     "prepublishOnly": "yarn types"
   },
   "bin": {
-    "start-site": "scripts/start-site",
-    "serve-site": "scripts/serve-site",
-    "build-site": "scripts/build-site",
-    "build-images": "scripts/build-images",
-    "build-analyze": "scripts/build-analyze"
+    "start-site": "./scripts/start-site",
+    "serve-site": "./scripts/serve-site",
+    "build-site": "./scripts/build-site",
+    "build-images": "./scripts/build-images",
+    "build-analyze": "./scripts/build-analyze"
   },
   "types": "./types/index.d.ts",
   "exports": {
