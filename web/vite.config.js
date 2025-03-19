@@ -59,9 +59,7 @@ function setup() {
 
         build: {
           outDir: '../dist',
-          assetsInlineLimit: (file) => {
-            return !file.endsWith('.svg');
-          },
+          assetsInlineLimit: 0,
         },
 
         // All of this is for using .js files as .jsx.

@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'fs/promises';
 
 import { build } from 'vite';
 import { JSDOM } from 'jsdom';
+import { noop } from 'lodash-es';
 import config from '@bedrockio/config';
 
 import { loadData } from '../utils/data.js';
@@ -17,6 +18,7 @@ export async function generate(options) {
   await build({
     build: {
       emptyOutDir: true,
+      assetsInlineLimit: 0,
     },
 
     ...(options.env && {
@@ -39,8 +41,21 @@ export async function generate(options) {
 
   global.window = dom.window;
   global.history = dom.window.history;
+  global.location = dom.window.location;
   global.document = dom.window.document;
   global.localStorage = dom.window.localStorage;
+  global.sessionStorage = dom.window.sessionStorage;
+
+  // Note provided by JSDOM
+  global.matchMedia = mockMatchMedia;
+  global.cancelAnimationFrame = noop;
+  global.requestAnimationFrame = noop;
+
+  global.window.matchMedia = mockMatchMedia;
+  global.window.cancelAnimationFrame = noop;
+  global.window.requestAnimationFrame = noop;
+
+  // Env configs
   global.env = ENV;
 
   // Now build the generator. This works
@@ -57,6 +72,7 @@ export async function generate(options) {
     build: {
       ssr: './generator.entry.js',
       emptyOutDir: false,
+      assetsInlineLimit: 0,
     },
   });
 
@@ -84,4 +100,12 @@ export async function generate(options) {
       await writeFile(path.join('dist', filename), html);
     }),
   );
+}
+
+function mockMatchMedia() {
+  return {
+    matches: false,
+    addListener: noop,
+    removeListener: noop,
+  };
 }
