@@ -344,12 +344,32 @@
     kleur "^4.1.5"
     stdout-stream "^2.0.0"
 
-"@bedrockio/model@^0.2.1":
-  version "0.2.22"
-  resolved "https://registry.yarnpkg.com/@bedrockio/model/-/model-0.2.22.tgz#24badba8ad355c88ce82e56279d4cf24a2293a3b"
-  integrity sha512-Ed5hOotNSWkRA0+UoKo4JDyrvcXrdnBKVn8dJ0+x9u9ywsgyXY+r+ZyqN7o/KnsMCQjY1kZwZnWYSYkcaiKs1A==
+"@bedrockio/logger@^1.1.1":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@bedrockio/logger/-/logger-1.1.5.tgz#8f87f4ae1daad6bed6bfa212f8731fee2ae3fbf7"
+  integrity sha512-G3k50xPcuD8dr9pRjtUJgZvjvAbJHc+m4XomDsyMgRa6QRO9uY2QEMSkDTcY4/ZA92QdmgXjCVsYoMiBsYOAFg==
   dependencies:
-    "@bedrockio/logger" "^1.0.6"
+    "@google-cloud/opentelemetry-cloud-trace-exporter" "^2.4.1"
+    "@opentelemetry/api" "^1.9.0"
+    "@opentelemetry/core" "^1.29.0"
+    "@opentelemetry/instrumentation" "^0.56.0"
+    "@opentelemetry/instrumentation-http" "^0.56.0"
+    "@opentelemetry/instrumentation-koa" "^0.46.0"
+    "@opentelemetry/instrumentation-mongoose" "^0.45.0"
+    "@opentelemetry/resources" "^1.29.0"
+    "@opentelemetry/sdk-trace-base" "^1.29.0"
+    "@opentelemetry/sdk-trace-node" "^1.29.0"
+    "@opentelemetry/semantic-conventions" "^1.28.0"
+    bytes "^3.1.2"
+    kleur "^4.1.5"
+    stdout-stream "^2.0.0"
+
+"@bedrockio/model@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@bedrockio/model/-/model-0.13.0.tgz#ea7490227fb05a127ff0068496570e83ac9e2aab"
+  integrity sha512-AEmhAKgpTlytXLt80o00dLxFhJd+TRU6miEP6EHij0gp6NLTjwdE5E4oKdNs7drB8/xKqzNm++UuDnQSjX+jqA==
+  dependencies:
+    "@bedrockio/logger" "^1.1.1"
     lodash "^4.17.21"
 
 "@bedrockio/prettier-config@^1.0.2":
@@ -357,18 +377,19 @@
   resolved "https://registry.yarnpkg.com/@bedrockio/prettier-config/-/prettier-config-1.0.2.tgz#89878381d3059b810f97514ee6b69f946a6d1654"
   integrity sha512-Ebcx/D9FcV6WEQH2gXA4SkN62fus/aVMW46MYFm1/y+S0GVYj+OCuBbRMM4F8YAq9ntJ+B/z9fLiOheNpEpRzA==
 
-"@bedrockio/vite-visualizer@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@bedrockio/vite-visualizer/-/vite-visualizer-0.1.0.tgz#75f139f1f1f954fe47d4d14ec2c4b9c4b9796b27"
-  integrity sha512-gKYyCWFMNUzqTauHUIA38mOA1HQDrbDUlrmTFaXNLhXg/K44R7PKQcw2dcDVtXuz6nIlVKr6JwlszvXYvjjw/w==
+"@bedrockio/vite-visualizer@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@bedrockio/vite-visualizer/-/vite-visualizer-0.1.1.tgz#0b830b8ae09e702ad233838180971e188861dc01"
+  integrity sha512-5DPNP5HloBuFIeLz3vbvlST2UePw5xq3L7WCT2/lLorrTQQ9+PVIaKfXQDSecS7cbVcA8EARU2mG4MbEOeP/iw==
   dependencies:
     open "^10.1.0"
 
-"@bedrockio/yada@^1.0.35":
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/@bedrockio/yada/-/yada-1.2.9.tgz#f436c5524cffb2b79206d9bc74ac24289bba33fb"
-  integrity sha512-f9TmbCxJc2SuqXok4w3VjJnQubYvm5OM5HTcvVTOrH0VifLX7Qo5jRx6CFj7JjQe2MIAQuMoeDfyjDcsntZxxw==
+"@bedrockio/yada@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@bedrockio/yada/-/yada-1.5.0.tgz#4e74c9996dbb4bb5d36365ad557d9d92b2377702"
+  integrity sha512-jsHa2PKvbTaktqGoRpXncn9qHHDIOLMoCrlJoJvet9FS0dipwBPuXc/G8wQWkhL2t9/JUgu/cQ4JJAcWrQEWOw==
   dependencies:
+    lodash "^4.17.21"
     validator "^13.9.0"
 
 "@csstools/color-helpers@^5.0.1":
