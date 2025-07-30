@@ -19,14 +19,14 @@
     "@kubernetes/client-node": "0.20.0"
   },
   "peerDependencies": {
-    "@bedrockio/model": "^0.13.0",
+    "@bedrockio/model": "^0.13.1",
     "@bedrockio/yada": "^1.5.0",
     "mongoose": "^7.6.4"
   },
   "devDependencies": {
     "@bedrockio/eslint-plugin": "^1.1.7",
     "@bedrockio/logger": "^1.0.6",
-    "@bedrockio/model": "^0.13.0",
+    "@bedrockio/model": "^0.13.1",
     "@bedrockio/prettier-config": "^1.0.2",
     "@bedrockio/yada": "^1.5.0",
     "@shelf/jest-mongodb": "^4.1.7",
