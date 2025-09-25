@@ -18,6 +18,7 @@
     "build-analyze": "./scripts/build-analyze"
   },
   "types": "./types/index.d.ts",
+  "module": "./src/client/index.js",
   "exports": {
     ".": "./src/client/index.js",
     "./editor": "./src/client/editor/Editor.js",
