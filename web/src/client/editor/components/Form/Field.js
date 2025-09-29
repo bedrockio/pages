@@ -28,30 +28,34 @@ class Field extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
     return (
       <fieldset disabled={this.getDisabled()} className={this.getBlockClass()}>
-        {this.renderLabel()}
-        {children}
+        {this.renderBody()}
         {this.renderError()}
       </fieldset>
     );
   }
 
-  renderLabel() {
-    let { label, required } = this.props;
-    if (!label) {
-      return;
+  renderBody() {
+    const { children } = this.props;
+    if (this.props.label) {
+      return this.renderWithLabel();
+    } else {
+      return children;
     }
-    if (required) {
-      label = (
-        <React.Fragment>
+  }
+
+  renderWithLabel() {
+    let { label, children, required } = this.props;
+    return (
+      <label>
+        <span>
           {label}
-          <span className="required">*</span>
-        </React.Fragment>
-      );
-    }
-    return <label>{label}</label>;
+          {required && <span className="required">*</span>}
+        </span>
+        {children}
+      </label>
+    );
   }
 
   renderError() {

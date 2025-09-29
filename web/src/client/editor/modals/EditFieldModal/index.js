@@ -26,7 +26,10 @@ class EditFieldModal extends React.Component {
   }
 
   componentDidMount() {
-    document.documentElement.addEventListener('click', this.onDocumentClick);
+    document.documentElement.addEventListener('click', this.onDocumentClick, {
+      // Use capture phase to allow editing content inside links, buttons, etc.
+      capture: true,
+    });
   }
 
   componentWillUnmount() {
@@ -34,14 +37,12 @@ class EditFieldModal extends React.Component {
   }
 
   onDocumentClick = (evt) => {
-    if (evt.target.closest('a:not([data-field-name]),[tabindex]')) {
-      return;
-    }
     const el = evt.target.closest('[data-field-name]');
     if (!el) {
       return;
     }
     evt.preventDefault();
+    evt.stopPropagation();
     evt.stopImmediatePropagation();
     const name = el.dataset.fieldName;
     const type = this.context.getFieldType(name);
