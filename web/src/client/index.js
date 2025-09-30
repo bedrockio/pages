@@ -3,6 +3,7 @@ export { default as Image } from './components/Image';
 export { default as Meta } from './components/Meta';
 export { default as Spacer } from './components/Spacer';
 export { default as Spinner } from './components/Spinner';
+export { default as FitText } from './components/FitText';
 export { default as Collection } from './components/Collection';
 export { default as ExternalLink } from './components/ExternalLink';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
